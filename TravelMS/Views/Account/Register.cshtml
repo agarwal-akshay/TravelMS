@@ -11,13 +11,12 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-
     <fieldset>
-        <legend>Registration Form</legend>
+        <legend>New User Sign Up</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.LabelFor(m => m.User_ID)
+                @Html.TextBoxFor(m => m.User_ID)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -26,6 +25,35 @@
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Emp_ID)
+                @Html.TextBoxFor(m => m.Emp_ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Emp_Name)
+                @Html.TextBoxFor(m => m.Emp_Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Gender)
+                @Html.RadioButtonFor(m=>m.Gender,"M") "Male"
+                @Html.RadioButtonFor(m=>m.Gender,"F") "Female"
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Date_of_Birth)
+                @Html.EditorFor(m=>m.Date_of_Birth)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Date_of_Joining)
+                @Html.EditorFor(m=>m.Date_of_Joining)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Job_Level)
+                @Html.TextBoxFor(m => m.Job_Level)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Job_Location)
+                @Html.TextBoxFor(m => m.Job_Location)
             </li>
         </ol>
         <input type="submit" value="Register" />

@@ -73,8 +73,8 @@ namespace TravelMS.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "User ID")]
+        public string User_ID { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -86,6 +86,36 @@ namespace TravelMS.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Employee ID")]
+        public string Emp_ID { get; set; }
+
+        [Required]
+        [Display(Name = "Employee Name")]
+        public string Emp_Name { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of Birth")]
+        public DateTime Date_of_Birth { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of Joining")]
+        public DateTime Date_of_Joining { get; set; }
+
+        [Required]
+        [Display(Name = "Job Level")]
+        public int Job_Level { get; set; }
+
+        [Required]
+        [Display(Name = "Job Location")]
+        public string Job_Location { get; set; }
     }
 
     public class ExternalLogin
