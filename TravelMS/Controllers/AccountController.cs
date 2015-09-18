@@ -79,6 +79,9 @@ namespace TravelMS.Controllers
                 // Attempt to register the user
                 try
                 {
+                    if (!RegisterBizLayer.RegisterUserBiz(model))
+                        return View("Error");
+
                     WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
                     WebSecurity.Login(model.User_ID, model.Password);
                     return RedirectToAction("Index", "Home");

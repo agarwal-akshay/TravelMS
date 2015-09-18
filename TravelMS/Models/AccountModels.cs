@@ -87,6 +87,8 @@ namespace TravelMS.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        public char Access_Status { get; set; }
+
         [Required]
         [Display(Name = "Employee ID")]
         public string Emp_ID { get; set; }
