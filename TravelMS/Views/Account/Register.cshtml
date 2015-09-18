@@ -8,6 +8,46 @@
     <h2>Create a new account.</h2>
 </hgroup>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById("RegisterButton").disabled = true
+        }
+        );
+        function checkAvailUser_ID() {
+            var serviceURL = '/AjaxMethods/User_IDCheck';
+            var User_ID=document.getElementById('User_ID').value;
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: { User_ID: User_ID } ,
+                dataType: "text",
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data, status) {
+                if (data == "1") {
+                    document.getElementById("RegisterButton").disabled = false;
+                    document.getElementById('User_ID').style.backgroundColor = 'lightgreen';
+                    alert("User ID Available");
+                }
+                else {
+                    document.getElementById('User_ID').style.backgroundColor = 'red';
+                    alert("User ID Not Available");
+                }
+            }
+
+            function errorFunc() {
+                alert('error');
+            }
+        }
+    </script>
+}
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
@@ -16,7 +56,8 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.User_ID)
-                @Html.TextBoxFor(m => m.User_ID)
+                @Html.TextBoxFor(m => m.User_ID,new {@onkeypress="document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';"})
+                <input id="Button1" type="button" value="Check User ID Availablity" onclick="checkAvailUser_ID()"/>
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -56,10 +97,8 @@
                 @Html.TextBoxFor(m => m.Job_Location)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Register" id="RegisterButton" />
     </fieldset>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
