@@ -15,8 +15,7 @@ namespace TravelMS
     {
         public static bool RegisterUserDAL(Models.RegisterModel userData)
         {
-            //Database travelMSysDB = EnterpriseLibraryContainer.Current.GetInstance<Database>("ConnectionStringCS");
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\aamat\Source\Repos\TravelMS\TravelMS\App_Data\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
             SqlCommand insertCmmnd = new SqlCommand("INSERT INTO EMPLOYEES ([User_ID],[Password],[Emp_ID],[Emp_Name],[Gender],[Date_of_Birth],[Date_of_Joining],[Job_Level],[Job_Location]) VALUES (@User_ID,@Password,@Emp_ID,@Emp_Name,@Gender,@Date_of_Birth,@Date_of_Joining,@Job_Level,@Job_Location)");
             insertCmmnd.CommandType = CommandType.Text;
