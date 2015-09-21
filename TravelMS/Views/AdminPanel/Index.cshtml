@@ -10,17 +10,18 @@
 @{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-            <p>Employee Details</p>
-                    @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel");
-    <br/>
-                    @Html.ActionLink("Reset Password", "reset", "AdminPanel");
+    <p>Employee Details</p>
+    @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel");
     <br />
-                    @Html.ActionLink("Settle Claims", "settle", "AdminPanel");
+    @Html.ActionLink("Reset Password", "reset", "AdminPanel");
     <br />
-                    @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel");
-            <p>Agent Details</p>
-                    @Html.ActionLink("Add New Agents", "addAgent", "AdminPanel");
-                    @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel");
+    @Html.ActionLink("Settle Claims", "settle", "AdminPanel");
+    <br />
+    @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel");
+    <p>Agent Details</p>
+    @Html.ActionLink("Add New Agents", "addAgent", "AdminPanel");
+    <br />
+    @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel");
 }
 
 @section Scripts {
