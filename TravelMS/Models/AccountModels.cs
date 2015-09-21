@@ -58,8 +58,8 @@ namespace TravelMS.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "User ID")]
+        public string User_ID { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -73,7 +73,7 @@ namespace TravelMS.Models
     public class RegisterModel
     {
         [Required]
-        [StringLength(6, ErrorMessage = "The Employee ID must be 6 digits long.", MinimumLength = 6)]
+        [Range(100000,999999)]
         [Display(Name = "Employee ID")]
         public int Emp_ID { get; set; }
 
@@ -93,8 +93,8 @@ namespace TravelMS.Models
 
         [Required]
         [StringLength(30, ErrorMessage = "The Password must be maximum 30 digits long.", MinimumLength = 6)]
-        [RegularExpression(@"^.*(?=.*[!@#$%^&*]).(?:.*[A-Z]).(?:.*[\d]).*$",
-                    ErrorMessage = "Password must have at least 1 special character(!@#$%^&*), 1 upper case character and a digit.")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?!.*\s).*$",
+                            ErrorMessage = "Password must have at least 1 special character(!@#$%^&*), 1 upper case character and a digit.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

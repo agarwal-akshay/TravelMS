@@ -18,11 +18,16 @@
 <ol class="round">
     <li class="one">
         <h5>Place Travel Requests</h5>
-        Have a mode to go on
+        @Html.ActionLink("Place a new travel request ->", "NewTravelRequest", "Employee")
     </li>
 
     <li class="two">
-        <h5>Add Accomodation Details</h5>
+        <h5>View Travel Requests</h5>
+        @Html.ActionLink("View travel requests ->", "ViewTravelRequests", "Employee")
+    </li>
+
+    <li class="three">
+        <h5>Place claim requests</h5>
         Have a place to stay
     </li>
 </ol>

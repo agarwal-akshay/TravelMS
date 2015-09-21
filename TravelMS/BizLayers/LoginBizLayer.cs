@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
+using System.Web;
 
 namespace TravelMS
 {
-    public class RegisterBizLayer
+    public class LoginBizLayer
     {
-        public static bool RegisterUserBiz(Models.RegisterModel userData)
+        public static bool LoginUserBiz(Models.LoginModel userData)
         {
-            MD5 hasher=MD5.Create();
+            MD5 hasher = MD5.Create();
             byte[] data = hasher.ComputeHash(Encoding.UTF8.GetBytes(userData.Password));
-           
+
             StringBuilder sBuilder = new StringBuilder();
 
             for (int i = 0; i < data.Length; i++)
@@ -23,7 +23,7 @@ namespace TravelMS
 
             userData.Password = sBuilder.ToString();
 
-            if (RegisterDALayer.RegisterUserDAL(userData))
+            if (LoginDALayer.LoginUserDAL(userData))
                 return true;
             return false;
         }
