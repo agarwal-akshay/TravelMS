@@ -73,31 +73,34 @@ namespace TravelMS.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User ID")]
-        public string User_ID { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
-        public char Access_Status { get; set; }
-
-        [Required]
+        [StringLength(6, ErrorMessage = "The Employee ID must be 6 digits long.", MinimumLength = 6)]
         [Display(Name = "Employee ID")]
-        public string Emp_ID { get; set; }
+        public int Emp_ID { get; set; }
 
         [Required]
+        [StringLength(30, ErrorMessage = "The Employee Name must be maximum 30 digits long.", MinimumLength = 1)]
+        [DataType(DataType.Text)]
         [Display(Name = "Employee Name")]
         public string Emp_Name { get; set; }
 
         [Required]
+        [StringLength(30, ErrorMessage = "The User ID must be maximum 30 digits long.", MinimumLength = 1)]
+        [DataType(DataType.Text)]
+        [Display(Name = "User ID")]
+        public string User_ID { get; set; }
+
+        public string Access_Status { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The Password must be maximum 30 digits long.", MinimumLength = 6)]
+        [RegularExpression(@"^.*(?=.*[!@#$%^&*]).(?:.*[A-Z]).(?:.*[\d]).*$",
+                    ErrorMessage = "Password must have at least 1 special character(!@#$%^&*), 1 upper case character and a digit.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
@@ -116,6 +119,7 @@ namespace TravelMS.Models
         public int Job_Level { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Job Location")]
         public string Job_Location { get; set; }
     }
