@@ -24,7 +24,6 @@ namespace TravelMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
                 try
                 {
                     if (!TravelBizLayer.TravelReqBiz(model))
@@ -44,9 +43,9 @@ namespace TravelMS.Controllers
 
         public ActionResult ViewTravelRequests()
         {
-            //List<NewTravelRequestModel> model = TravelBizLayer.GetRequestList();
-            //return View(model);
-            return View();
+            List<NewTravelRequestModel> model = TravelBizLayer.GetRequestList();
+            return View(model);
+            
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

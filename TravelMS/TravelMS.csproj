@@ -440,6 +440,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\Employee\NewTravelRequest.cshtml" />
+    <Content Include="Views\Employee\ViewTravelRequests.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
