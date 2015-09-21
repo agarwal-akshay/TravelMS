@@ -58,8 +58,8 @@ namespace TravelMS.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "User ID")]
+        public string User_ID { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
