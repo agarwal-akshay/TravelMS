@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TravelMS.Filters;
 using TravelMS.Models;
 
 namespace TravelMS.Controllers
 {
+    //[Authorize]
+    //[InitializeSimpleMembership]
     public class AdminPanelController : Controller
     {
         //
@@ -20,6 +23,7 @@ namespace TravelMS.Controllers
         public ActionResult lockedAccounts(LoginModel model)
         {
             ViewBag.User_ID = model.UserName;
+            ViewBag.lockedAccounts = AdminPanelBizLayer.lockedAccounts();
             return View();
         }
         public ActionResult reset(LoginModel model)

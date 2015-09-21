@@ -4,13 +4,13 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>@*@ViewBag.User_ID*@</h2>
+    <h2>@ViewBag.User_ID</h2>
 </hgroup>
 
 @{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    <p>Employee Details</p>
+    <h3>Employee Details</h3>
     @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel");
     <br />
     @Html.ActionLink("Reset Password", "reset", "AdminPanel");
@@ -18,7 +18,7 @@
     @Html.ActionLink("Settle Claims", "settle", "AdminPanel");
     <br />
     @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel");
-    <p>Agent Details</p>
+    <h3>Agent Details</h3>
     @Html.ActionLink("Add New Agents", "addAgent", "AdminPanel");
     <br />
     @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel");

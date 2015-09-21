@@ -11,7 +11,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             document.getElementById("RegisterButton").disabled = true
@@ -19,11 +19,11 @@
         );
         function checkAvailUser_ID() {
             var serviceURL = '/AjaxMethods/User_IDCheck';
-            var User_ID=document.getElementById('User_ID').value;
+            var User_ID = document.getElementById('User_ID').value;
             $.ajax({
                 type: "POST",
                 url: serviceURL,
-                data: { User_ID: User_ID } ,
+                data: { User_ID: User_ID },
                 dataType: "text",
                 success: successFunc,
                 error: errorFunc
@@ -48,7 +48,8 @@
     </script>
 }
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
     <fieldset>
@@ -56,8 +57,8 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.User_ID)
-                @Html.TextBoxFor(m => m.User_ID,new {@onkeypress="document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';"})
-                <input id="Button1" type="button" value="Check User ID Availablity" onclick="checkAvailUser_ID()"/>
+                @Html.TextBoxFor(m => m.User_ID, new { @onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
+                <input id="Button1" type="button" value="Check User ID Availablity" onclick="checkAvailUser_ID()" />
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -73,24 +74,40 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.Gender)
-                @Html.RadioButtonFor(m=>m.Gender,"M") Male
-                @Html.RadioButtonFor(m=>m.Gender,"F") Female
+                @Html.RadioButtonFor(m => m.Gender, "M") Male
+                @Html.RadioButtonFor(m => m.Gender, "F") Female
             </li>
             <li>
                 @Html.LabelFor(m => m.Date_of_Birth)
-                @Html.EditorFor(m=>m.Date_of_Birth)
+                @Html.EditorFor(m => m.Date_of_Birth)
             </li>
             <li>
                 @Html.LabelFor(m => m.Date_of_Joining)
-                @Html.EditorFor(m=>m.Date_of_Joining)
+                @Html.EditorFor(m => m.Date_of_Joining)
+            </li>
+@{
+    var locationItems = new List<SelectListItem>
+        {
+              new SelectListItem { Text = "Mumbai", Value = "Mumbai" },
+              new SelectListItem { Text = "Bangalore", Value = "Bangalore"}
+        };
+    var levelItems = new List<SelectListItem>
+        {
+              new SelectListItem { Text = "1", Value = "1" },
+              new SelectListItem { Text = "2", Value = "2" },
+              new SelectListItem { Text = "3", Value = "3" },
+              new SelectListItem { Text = "4", Value = "4" },
+              new SelectListItem { Text = "5", Value = "5" },
+              new SelectListItem { Text = "6", Value = "6" }
+        };
+        }
+            <li>
+                @Html.LabelFor(m => m.Job_Location)
+                @Html.DropDownListFor(m => m.Job_Location, new SelectList(locationItems, "Value", "Text"))
             </li>
             <li>
                 @Html.LabelFor(m => m.Job_Level)
-                @Html.TextBoxFor(m => m.Job_Level)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Job_Location)
-                @Html.TextBoxFor(m => m.Job_Location)
+                @Html.DropDownListFor(m => m.Job_Level, new SelectList(levelItems, "Value", "Text"))
             </li>
         </ol>
         <input type="submit" value="Register" id="RegisterButton" />

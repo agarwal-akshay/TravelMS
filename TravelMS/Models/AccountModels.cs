@@ -73,18 +73,21 @@ namespace TravelMS.Models
     public class RegisterModel
     {
         [Required]
-        [StringLength(6, ErrorMessage = "The Employee ID must be 6 digits long.", MinimumLength = 6)]
+        [Range(100000,999999,ErrorMessage = "The Employee ID must be 6 digits long.")]
+        [RegularExpression(@"^(?!.*\s).*$", ErrorMessage = "This field can't have spaces.")]
         [Display(Name = "Employee ID")]
         public int Emp_ID { get; set; }
 
         [Required]
         [StringLength(30, ErrorMessage = "The Employee Name must be maximum 30 digits long.", MinimumLength = 1)]
+        [RegularExpression(@"^(?!.*\s).*$", ErrorMessage = "This field can't have spaces.")]
         [DataType(DataType.Text)]
         [Display(Name = "Employee Name")]
         public string Emp_Name { get; set; }
 
         [Required]
         [StringLength(30, ErrorMessage = "The User ID must be maximum 30 digits long.", MinimumLength = 1)]
+        [RegularExpression(@"^(?!.*\s).*$", ErrorMessage = "This field can't have spaces.")]
         [DataType(DataType.Text)]
         [Display(Name = "User ID")]
         public string User_ID { get; set; }
@@ -93,7 +96,7 @@ namespace TravelMS.Models
 
         [Required]
         [StringLength(30, ErrorMessage = "The Password must be maximum 30 digits long.", MinimumLength = 6)]
-        [RegularExpression(@"^.*(?=.*[!@#$%^&*]).(?:.*[A-Z]).(?:.*[\d]).*$",
+        [RegularExpression(@"^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?!.*\s).*$",
                     ErrorMessage = "Password must have at least 1 special character(!@#$%^&*), 1 upper case character and a digit.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -107,10 +110,12 @@ namespace TravelMS.Models
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
+        [DisplayFormat(DataFormatString = "YYYY/MM/DD", ApplyFormatInEditMode = true)]
         public DateTime Date_of_Birth { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "YYYY/MM/DD", ApplyFormatInEditMode = true)]
         [Display(Name = "Date of Joining")]
         public DateTime Date_of_Joining { get; set; }
 
