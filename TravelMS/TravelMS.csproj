@@ -308,12 +308,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BizLayers\User_IDCheckBizLayer.cs" />
     <Compile Include="Bootstrap Html Helpers\DatePickerFor.cs" />
     <Compile Include="Bootstrap Html Helpers\HelperMethods.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
+    <Compile Include="Controllers\AjaxMethodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccessLayers\RegisterDALayer.cs" />
+    <Compile Include="DataAccessLayers\User_IDCheckDALayer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
