@@ -20,6 +20,5 @@ namespace TravelMS.Controllers
                 return "1";
             return "0";
         }
-
     }
 }
