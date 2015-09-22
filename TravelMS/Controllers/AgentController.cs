@@ -11,22 +11,36 @@ namespace TravelMS.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class EmployeeController : Controller
-    {        
-        public ActionResult NewTravelRequest()
+    public class AgentController : Controller
+    {
+
+        public ActionResult ViewBookingRequests()
+        {
+            List<NewTravelRequestModel> model = TravelBizLayer.GetAgentRequestList();
+            return View(model);
+        }
+
+        public ActionResult BookTicket()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewTravelRequest(NewTravelRequestModel model)
+        public ActionResult BookTicket(TicketBooking model)
         {
+            //ViewBag.Emp_ID = Emp_ID; //(ViewBag unused)
+            //ViewBag.Mode_of_Travel = Mode_of_Travel;
+            //ViewBag.Travel_Class = Travel_Class;
+            //ViewBag.Travel_Date = Travel_Date;
+            //ViewBag.Travel_Time_hh = Travel_Time_hh;
+            //ViewBag.Travel_Time_mm = Travel_Time_mm;
+            //ViewBag.Remarks = Remarks;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (!TravelBizLayer.TravelReqBiz(model))
+                    if (!AgentBizLayer.BookTicketBiz(model))
                         return View("Error");
 
                     return RedirectToAction("Index", "Home");
@@ -41,16 +55,9 @@ namespace TravelMS.Controllers
             return View(model);
         }
 
-        public ActionResult ViewTravelRequests()
-        {
-            List<NewTravelRequestModel> model = TravelBizLayer.GetRequestList();
-            return View(model);            
-        }
-
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
+
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
