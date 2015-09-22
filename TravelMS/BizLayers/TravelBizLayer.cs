@@ -19,5 +19,11 @@ namespace TravelMS
             List<Models.NewTravelRequestModel> reqList=TravelDALayer.GetRequestList();
             return reqList;
         }
+
+        public static List<Models.NewTravelRequestModel> GetAgentRequestList()
+        {
+            List<Models.NewTravelRequestModel> reqList = TravelDALayer.GetAgentRequestList();
+            return reqList;
+        }
     }
 }

@@ -224,6 +224,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BizLayers\AgentBizLayer.cs" />
     <Compile Include="BizLayers\LoginBizLayer.cs" />
     <Compile Include="BizLayers\TravelBizLayer.cs" />
     <Compile Include="BizLayers\User_IDCheckBizLayer.cs" />
@@ -231,9 +232,11 @@
     <Compile Include="Bootstrap Html Helpers\HelperMethods.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\AjaxMethodsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccessLayers\AgentDALayer.cs" />
     <Compile Include="DataAccessLayers\LoginDALayer.cs" />
     <Compile Include="DataAccessLayers\RegisterDALayer.cs" />
     <Compile Include="DataAccessLayers\TravelDALayer.cs" />
@@ -243,9 +246,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AgentModels.cs" />
     <Compile Include="Models\EmployeeModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BizLayers\RegisterBizLayer.cs" />
+    <Compile Include="ViewModels\TravelReqViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\aspnet-TravelMS-20150915125021.mdf" />
@@ -441,6 +446,8 @@
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\Employee\NewTravelRequest.cshtml" />
     <Content Include="Views\Employee\ViewTravelRequests.cshtml" />
+    <Content Include="Views\Agent\BookTicket.cshtml" />
+    <Content Include="Views\Agent\ViewBookingRequests.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
