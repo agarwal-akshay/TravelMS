@@ -14,7 +14,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            document.getElementById("RegisterButton").disabled = true
+            document.getElementById("RegisterButton").disabled = true;
+            document.getElementById("RegisterButton").style.opacity = "0.5";
+            document.getElementById("RegisterButton").style.cursor = "not-allowed"
         }
         );
         function checkAvailUser_ID() {
@@ -29,9 +31,10 @@
                 error: errorFunc
             });
 
-            function successFunc(data, status) {
-                if (data == "1") {
+            function successFunc(data,status) {
+                if (data == true) {
                     document.getElementById("RegisterButton").disabled = false;
+                    document.getElementById("RegisterButton").removeAttribute("style");
                     document.getElementById('User_ID').style.backgroundColor = 'lightgreen';
                     alert("User ID Available");
                 }
@@ -57,7 +60,7 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.User_ID)
-                @Html.TextBoxFor(m => m.User_ID, new { @onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
+                @Html.EditorFor(m => m.User_ID, new { @onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
                 <input id="Button1" type="button" value="Check User ID Availablity" onclick="checkAvailUser_ID()" />
             </li>
             <li>
@@ -66,11 +69,11 @@
             </li>
             <li>
                 @Html.LabelFor(m => m.Emp_ID)
-                @Html.TextBoxFor(m => m.Emp_ID)
+                @Html.EditorFor(m => m.Emp_ID)
             </li>
             <li>
                 @Html.LabelFor(m => m.Emp_Name)
-                @Html.TextBoxFor(m => m.Emp_Name)
+                @Html.EditorFor(m => m.Emp_Name)
             </li>
             <li>
                 @Html.LabelFor(m => m.Gender)

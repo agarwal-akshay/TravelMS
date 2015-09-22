@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TravelMS.Models.RegisterModel>
+
+@{
+    ViewBag.Title = "Locked Accounts";
+}
+
+<style>
+    table, td, th {
+        border: 1px solid green;
+    }
+
+    th {
+        background-color: darkgreen;
+        color: white;
+    }
+</style>
+<h2>@ViewBag.Title</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>User ID</th>
+            <th>Gender</th>
+            <th>Job_Level</th>
+            <th>Location</th>
+            <th>Account Status</th>
+        </tr>
+    </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("User_ID", item.User_ID)
+                <tr>
+                    <td><input type="submit" value="Unlock"/></td>
+                    <td>@item.Emp_ID</td>
+                    <td>@item.Emp_Name</td>
+                    <td>@item.User_ID</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Job_Level</td>
+                    <td>@item.Job_Location</td>
+                    <td>@(string.Equals(item.Access_Status, "F") ? "Locked" : "Unlocked")</td>
+                </tr>
+            }
+            }
+        </tbody>
+</table>

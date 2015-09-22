@@ -1,0 +1,42 @@
+﻿@model TravelMS.Models.AgentModel
+
+@{
+    ViewBag.Title = "Add New Agent";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Add New Agent</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Agent_ID)
+                @Html.EditorFor(m => m.Agent_ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Agent_Name)
+                @Html.EditorFor(m => m.Agent_Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Address)
+                @Html.EditorFor(m => m.Address)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Phone_Num)
+                @Html.EditorFor(m => m.Phone_Num)
+            </li>
+            <li>
+                <input type="hidden" name="Creator_Admin_ID" value="@User.Identity.Name" />
+            </li>
+        </ol>
+        <input type="submit" value="Add Agent" id="addAgentButton"/>
+    </fieldset>
+}

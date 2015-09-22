@@ -14,15 +14,37 @@ namespace TravelMS
         public static List<RegisterModel> lockedAccounts()
         {
             List<RegisterModel> lstObj = new List<RegisterModel>();
-            SqlDataReader dr = AdminPanelDALayer.lockedAccounts();
+            IDataReader dr = AdminPanelDALayer.lockedAccounts();
             while(dr.Read())
             {
-                foreach (DataRow drow in dr.GetSchemaTable().Rows)
-                {
-                    //lstObj.Add(drow);
-                }
+                lstObj.Add(FillDataRecord(dr));
             }
             return lstObj;
+        }
+
+        public static bool unlockAccount(string requestedUser_ID)
+        {
+            return AdminPanelDALayer.unlockAccount(requestedUser_ID);
+        }
+
+        private static RegisterModel FillDataRecord(IDataReader dr)
+        {
+            RegisterModel rm = new RegisterModel();
+
+            rm.Emp_ID = Int32.Parse(dr.GetString(dr.GetOrdinal("Emp_ID")));
+            rm.Emp_Name = dr.GetString(dr.GetOrdinal("Emp_Name"));
+            rm.User_ID = dr.GetString(dr.GetOrdinal("User_ID"));
+            rm.Gender = dr.GetString(dr.GetOrdinal("Gender"));
+            rm.Job_Level = dr.GetInt32(dr.GetOrdinal("Job_Level"));
+            rm.Job_Location = dr.GetString(dr.GetOrdinal("Job_Location"));
+            rm.Access_Status = dr.GetString(dr.GetOrdinal("Access_Status"));
+
+            return rm;
+        }
+
+        public static bool addAgent(AgentModel model)
+        {
+            return AdminPanelDALayer.addAgent(model);
         }
     }
 }

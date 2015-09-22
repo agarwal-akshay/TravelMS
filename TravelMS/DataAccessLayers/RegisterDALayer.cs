@@ -8,12 +8,13 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using TravelMS.Models;
 
 namespace TravelMS
 {
     public class RegisterDALayer
     {
-        public static bool RegisterUserDAL(Models.RegisterModel userData)
+        public static bool RegisterUserDAL(RegisterModel userData)
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 

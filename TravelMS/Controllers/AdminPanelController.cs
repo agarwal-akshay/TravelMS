@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using DotNetOpenAuth.AspNet;
+using Microsoft.Web.WebPages.OAuth;
+using WebMatrix.WebData;
+using TravelMS.Filters;
 using TravelMS.Models;
 
 namespace TravelMS.Controllers
@@ -11,40 +17,72 @@ namespace TravelMS.Controllers
     {
         //
         // GET: /AdminPanel/
+        [Authorize]
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-        public ActionResult Index(LoginModel model)
+        [Authorize]
+        public ActionResult lockedAccounts()
         {
-            ViewBag.User_ID = model.User_ID;
+            List<RegisterModel> modelList = AdminPanelBizLayer.lockedAccounts();
+            return View(modelList);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult lockedAccounts(List<RegisterModel> modelList, string User_ID)
+        {
+            var res = AdminPanelBizLayer.unlockAccount(User_ID);
+            ModelState.Clear();
+            List<RegisterModel> updatedmodelList = AdminPanelBizLayer.lockedAccounts();
+            return View(updatedmodelList);
+        }
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult reset()
+        {
             return View();
         }
-        public ActionResult lockedAccounts(LoginModel model)
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult settle()
         {
-            ViewBag.User_ID = model.User_ID;
             return View();
         }
-        public ActionResult reset(LoginModel model)
+        [Authorize]
+        public ActionResult closedRequests()
         {
-            ViewBag.User_ID = model.User_ID;
             return View();
         }
-        public ActionResult settle(LoginModel model)
+
+        [Authorize]
+        public ActionResult addAgent()
         {
-            ViewBag.User_ID = model.User_ID;
             return View();
         }
-        public ActionResult closedRequests(LoginModel model)
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult addAgent(AgentModel model)
         {
-            ViewBag.User_ID = model.User_ID;
+            if (ModelState.IsValid)
+            {
+                var res = AdminPanelBizLayer.addAgent(model);
+            }
+            ModelState.Clear();
             return View();
         }
-        public ActionResult addAgent(LoginModel model)
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult manageAgent()
         {
-            ViewBag.User_ID = model.User_ID;
-            return View();
-        }
-        public ActionResult manageAgent(LoginModel model)
-        {
-            ViewBag.User_ID = model.User_ID;
             return View();
         }
     }
