@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace TravelMS
 {
@@ -39,5 +40,21 @@ namespace TravelMS
                 return true;
             return false;
         }
+
+        public static string TravelUserEmp_IDBiz(string User_ID)
+        {
+            return TravelDALayer.GetUserEmp_ID(User_ID);
+        }
+
+        public static string TravelNextReq_IDBiz()
+        {
+            return TravelDALayer.GetNextReq_IDBiz();
+        }
+
+        public static IEnumerable<SelectListItem> AgentListBiz()
+        {
+            return TravelDALayer.AgentListDAL();
+        }
+
     }
 }

@@ -71,6 +71,7 @@ namespace TravelMS.Models
 
         [Required]
         [StringLength(50, ErrorMessage = "First Level Approver", MinimumLength = 1)]
+        [System.Web.Mvc.Remote("CheckApprover","AjaxMethods")]
         [DataType(DataType.Text)]
         [Display(Name = "First Level Approver")]
         public string First_Level_Approver{ get; set; }

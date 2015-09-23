@@ -8,6 +8,15 @@ namespace TravelMS.Controllers
 {
     public class AjaxMethodsController : Controller
     {
+        public JsonResult CheckApprover(string First_Level_Approver)
+        {
+
+            if (CheckApproverBiz.ApproverIsFirstLevel(First_Level_Approver))
+                return Json(true, JsonRequestBehavior.AllowGet);
+
+            return Json("Unauthorized Approver", JsonRequestBehavior.AllowGet);
+        }
+
         //
         // POST: /AjaxMethods/User_IDCheck
 

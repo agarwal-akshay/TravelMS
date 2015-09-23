@@ -226,6 +226,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BizLayers\AgentBizLayer.cs" />
     <Compile Include="BizLayers\AdminPanelBizLayer.cs" />
+    <Compile Include="BizLayers\CheckApproverBiz.cs" />
     <Compile Include="BizLayers\LoginBizLayer.cs" />
     <Compile Include="BizLayers\TravelBizLayer.cs" />
     <Compile Include="BizLayers\User_IDCheckBizLayer.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccessLayers\AgentDALayer.cs" />
     <Compile Include="DataAccessLayers\AdminPanelDALayer.cs" />
+    <Compile Include="DataAccessLayers\CheckApproverDAL.cs" />
     <Compile Include="DataAccessLayers\LoginDALayer.cs" />
     <Compile Include="DataAccessLayers\RegisterDALayer.cs" />
     <Compile Include="DataAccessLayers\TravelDALayer.cs" />

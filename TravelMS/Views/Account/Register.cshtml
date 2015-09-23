@@ -32,7 +32,7 @@
             });
 
             function successFunc(data,status) {
-                if (data == true) {
+                if ((data == true) || (data=="True")) {
                     document.getElementById("RegisterButton").disabled = false;
                     document.getElementById("RegisterButton").removeAttribute("style");
                     document.getElementById('User_ID').style.backgroundColor = 'lightgreen';

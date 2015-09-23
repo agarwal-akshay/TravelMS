@@ -19,7 +19,7 @@ namespace TravelMS
 
             selectCmmnd.Parameters.AddWithValue("@User_ID", userData.User_ID);
             
-            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd).ToString();
+            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd);
 
             if (!(pHash == null))
             if (pHash.ToString().Equals(userData.Password))
@@ -53,7 +53,7 @@ namespace TravelMS
 
             selectCmmnd.Parameters.AddWithValue("@User_ID", userData.User_ID);
 
-            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd).ToString();
+            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd);
 
             if (!(pHash == null))
                 if (pHash.ToString().Equals(userData.Password))
