@@ -10,7 +10,7 @@ namespace TravelMS.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "TRAVEL MANAGEMENT SYSTEM";
+            ViewBag.Message = "A convenient tool for employees' travel needs.";
 
             return View();
         }

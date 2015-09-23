@@ -13,6 +13,10 @@ namespace TravelMS.Controllers
     [InitializeSimpleMembership]
     public class AgentController : Controller
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         public ActionResult ViewBookingRequests()
         {
