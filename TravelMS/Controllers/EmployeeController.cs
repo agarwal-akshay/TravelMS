@@ -52,6 +52,28 @@ namespace TravelMS.Controllers
             return View(model);            
         }
 
+        public ActionResult ViewApproveRejRequests()
+        {
+            List<NewTravelRequestModel> model = TravelBizLayer.GetApproveRejRequestList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ApproveRequests()
+        {
+            if(!TravelBizLayer.ApproveRejBiz(Request.Params["Req_ID"], 'A'))
+                return View("Error");
+            return RedirectToAction("ViewApproveRejRequests", "Employee");
+        }
+
+        [HttpPost]
+        public ActionResult RejRequests()
+        {
+            if(!TravelBizLayer.ApproveRejBiz(Request.Params["Req_ID"], 'R'))
+                return View("Error");
+            return RedirectToAction("ViewApproveRejRequests","Employee");
+        }
+
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for

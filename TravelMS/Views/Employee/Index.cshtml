@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Employee Panel";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    @*<h2>@User.Identity.Name</h2>*@
+</hgroup>
+
+@{
+    <ul>
+        <li>
+            <h5>Travel Request</h5>
+            @Html.ActionLink("New Travel Request", "NewTravelRequest", "Employee")
+            <br />
+            @Html.ActionLink("View Travel Request", "ViewTravelRequests", "Employee")
+            <br />
+            @Html.ActionLink("Change Request", "ChangeRequest", "Employee")
+            <br />
+            @Html.ActionLink("Cancel Request", "CancelRequest", "Employee")
+        </li>
+        <li>
+            <h5>Claim Request</h5>
+            @Html.ActionLink("New Claim Request", "NewClaimRequest", "Employee")
+            <br />
+            @Html.ActionLink("View Claim Request", "ViewClaimRequest", "Employee")
+        </li>
+        <li>
+            <h5>@Html.ActionLink("Approve/Reject Requests", "ApproveRejectRequests", "Employee")</h5>
+        </li>
+    </ul>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

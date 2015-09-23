@@ -25,5 +25,19 @@ namespace TravelMS
             List<Models.NewTravelRequestModel> reqList = TravelDALayer.GetAgentRequestList();
             return reqList;
         }
+
+        public static List<Models.NewTravelRequestModel> GetApproveRejRequestList()
+        {
+            List<Models.NewTravelRequestModel> reqList = TravelDALayer.GetApproveRejRequestList();
+            return reqList;
+        }
+
+
+        public static bool ApproveRejBiz(string TReq_ID, char AorRej)
+        {
+            if (TravelDALayer.ApproveRejDAL(TReq_ID, AorRej))
+                return true;
+            return false;
+        }
     }
 }
