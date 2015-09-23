@@ -38,7 +38,6 @@ namespace TravelMS.Models
         public string Booking_Status { get; set; }
     }
 
-
     public class AgentModel
     {
         [Required]

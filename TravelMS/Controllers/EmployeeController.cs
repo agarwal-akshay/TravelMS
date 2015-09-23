@@ -13,6 +13,11 @@ namespace TravelMS.Controllers
     [InitializeSimpleMembership]
     public class EmployeeController : Controller
     {        
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult NewTravelRequest()
         {
             return View();
@@ -29,7 +34,7 @@ namespace TravelMS.Controllers
                     if (!TravelBizLayer.TravelReqBiz(model))
                         return View("Error");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Employee");
                 }
                 catch (MembershipCreateUserException e)
                 {
