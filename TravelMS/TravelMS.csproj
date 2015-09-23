@@ -452,6 +452,7 @@
     <Content Include="Views\Agent\ViewBookingRequests.cshtml" />
     <Content Include="Views\AdminPanel\lockedAccounts.cshtml" />
     <Content Include="Views\AdminPanel\addAgent.cshtml" />
+    <Content Include="Views\Employee\ViewApproveRejRequests.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
