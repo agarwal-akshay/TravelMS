@@ -9,7 +9,7 @@ namespace TravelMS
 {
     public class LoginBizLayer
     {
-        public static bool LoginUserBiz(Models.LoginModel userData)
+        public static bool LoginUserBiz(Models.LoginModel userData, string role)
         {
             MD5 hasher = MD5.Create();
             byte[] data = hasher.ComputeHash(Encoding.UTF8.GetBytes(userData.Password));
@@ -23,8 +23,21 @@ namespace TravelMS
 
             userData.Password = sBuilder.ToString();
 
-            if (LoginDALayer.LoginUserDAL(userData))
-                return true;
+            if (role.Equals("Emp"))
+            {
+                if (LoginDALayer.LoginUserDAL(userData))
+                    return true;
+            }
+            else if (role.Equals("Admin"))
+            {
+                if (LoginDALayer.LoginAdminDAL(userData))
+                    return true;
+            }
+            else if (role.Equals("Agent"))
+            {
+                if (LoginDALayer.LoginAgentDAL(userData))
+                    return true;
+            }
             return false;
         }
     }
