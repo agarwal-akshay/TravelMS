@@ -456,6 +456,7 @@
     <Content Include="Views\AdminPanel\addAgent.cshtml" />
     <Content Include="Views\Employee\ViewApproveRejRequests.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Agent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

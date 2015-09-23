@@ -1,15 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Employee Panel";
+    ViewBag.Title = "Employee Dashboard";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    @*<h2>@User.Identity.Name</h2>*@
+    <h2>@User.Identity.AuthenticationType</h2>
 </hgroup>
 
 @{
-    <ul>
-        <li>
+    <ol class="round">
+        <li class="one">
             <h5>Travel Request</h5>
             @Html.ActionLink("New Travel Request", "NewTravelRequest", "Employee")
             <br />
@@ -19,16 +19,17 @@
             <br />
             @Html.ActionLink("Cancel Request", "CancelRequest", "Employee")
         </li>
-        <li>
+        <li class="two">
             <h5>Claim Request</h5>
             @Html.ActionLink("New Claim Request", "NewClaimRequest", "Employee")
             <br />
             @Html.ActionLink("View Claim Request", "ViewClaimRequest", "Employee")
         </li>
-        <li>
-            <h5>@Html.ActionLink("Approve/Reject Requests", "ApproveRejectRequests", "Employee")</h5>
+        <li class="three">
+            <h5>Approve/Reject Requests</h5>
+            @Html.ActionLink("Approve/Reject Requests", "ViewApproveRejRequests", "Employee")
         </li>
-    </ul>
+    </ol>
 }
 
 @section Scripts {
