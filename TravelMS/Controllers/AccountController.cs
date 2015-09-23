@@ -35,11 +35,17 @@ namespace TravelMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (!LoginBizLayer.LoginUserBiz(model))
+            string role=Request.Params["Role"];
+            if (!LoginBizLayer.LoginUserBiz(model,role))
             {
                 ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 return View(model);
             }
+
+            //if credentials are in app db but not in default websecurity db - like how admin/agent login without using register functionality
+            if(!WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
+                WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
+
             if (ModelState.IsValid && WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);

@@ -19,10 +19,45 @@ namespace TravelMS
 
             selectCmmnd.Parameters.AddWithValue("@User_ID", userData.User_ID);
             
-            string pHash = travelMSysDB.ExecuteScalar(selectCmmnd).ToString();
-            
-            if (pHash.Equals(userData.Password))
+            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd).ToString();
+
+            if (!(pHash == null))
+            if (pHash.ToString().Equals(userData.Password))
                 return true;
+            return false;
+        }
+
+        internal static bool LoginAdminDAL(Models.LoginModel userData)
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand selectCmmnd = new SqlCommand("SELECT [Password] FROM ADMINS WHERE [Admin_ID]=@User_ID");
+            selectCmmnd.CommandType = CommandType.Text;
+
+            selectCmmnd.Parameters.AddWithValue("@User_ID", userData.User_ID);
+
+            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd);
+
+            if(!(pHash==null))
+                if (pHash.ToString().Equals(userData.Password))
+                return true;
+            return false;
+        }
+
+        internal static bool LoginAgentDAL(Models.LoginModel userData)
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand selectCmmnd = new SqlCommand("SELECT [Password] FROM AGENTS WHERE [Agent_ID]=@User_ID");
+            selectCmmnd.CommandType = CommandType.Text;
+
+            selectCmmnd.Parameters.AddWithValue("@User_ID", userData.User_ID);
+
+            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd).ToString();
+
+            if (!(pHash == null))
+                if (pHash.ToString().Equals(userData.Password))
+                    return true;
             return false;
         }
     }
