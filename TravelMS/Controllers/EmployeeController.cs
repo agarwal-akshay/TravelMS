@@ -32,6 +32,7 @@ namespace TravelMS.Controllers
         {
             ViewBag.UserEmp_ID=TravelBizLayer.TravelUserEmp_IDBiz(User.Identity.Name);
             ViewBag.NextReq_ID=TravelBizLayer.TravelNextReq_IDBiz();
+            ViewBag.AgentList = TravelBizLayer.AgentListBiz();
             if (ModelState.IsValid)
             {
                 try
@@ -39,7 +40,8 @@ namespace TravelMS.Controllers
                     if (!TravelBizLayer.TravelReqBiz(model))
                         return View("Error");
 
-                    return RedirectToAction("Index", "Employee");
+                    ViewBag.Message = "Travel Request Registered! <a href=\"/Home/Index\">Go to Home page</a>";
+                    return View("Success");
                 }
                 catch (MembershipCreateUserException e)
                 {

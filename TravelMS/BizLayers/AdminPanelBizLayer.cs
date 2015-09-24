@@ -15,7 +15,7 @@ namespace TravelMS
         {
             List<RegisterModel> lstObj = new List<RegisterModel>();
             IDataReader dr = AdminPanelDALayer.lockedAccounts();
-            while(dr.Read())
+            while (dr.Read())
             {
                 lstObj.Add(FillDataRecord(dr));
             }
@@ -37,7 +37,7 @@ namespace TravelMS
             rm.Gender = dr.GetString(dr.GetOrdinal("Gender"));
             rm.Job_Level = dr.GetInt32(dr.GetOrdinal("Job_Level"));
             rm.Job_Location = dr.GetString(dr.GetOrdinal("Job_Location"));
-            rm.Access_Status = dr.GetString(dr.GetOrdinal("Access_Status"));
+            rm.Access_Status = StatusDetail.AccessStatus(dr.GetString(dr.GetOrdinal("Access_Status")));
 
             return rm;
         }

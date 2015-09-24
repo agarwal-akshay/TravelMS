@@ -74,8 +74,8 @@ namespace TravelMS
                     Travel_Time_mm=(int)nReader[10],
                     First_Level_Approver=(string)nReader[11],
                     Agent_ID=(string)nReader[12],
-                    Request_Status=(string)nReader[13],
-                    Acco_Status=(string)nReader[14],
+                    Request_Status=StatusDetail.TravelRequestStatus( (string)nReader[13]),
+                    Acco_Status=StatusDetail.AccoStatus((string)nReader[14]),
                     Remarks=(string)nReader[15]
                 });
             }
@@ -88,7 +88,7 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS  WHERE Agent_ID = @CurAgent_ID AND REQUEST_STATUS='A'");
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS  WHERE Agent_ID = @CurAgent_ID AND REQUEST_STATUS='A' OR REQUEST_STATUS='P'");
 
             reqListCmmnd.Parameters.AddWithValue("@CurAgent_ID", WebSecurity.CurrentUserName);
 
@@ -117,8 +117,8 @@ namespace TravelMS
                     Travel_Time_mm = (int)nReader[10],
                     First_Level_Approver = (string)nReader[11],
                     Agent_ID = (string)nReader[12],
-                    Request_Status = (string)nReader[13],
-                    Acco_Status = (string)nReader[14],
+                    Request_Status = StatusDetail.TravelRequestStatus((string)nReader[13]),
+                    Acco_Status =StatusDetail.AccoStatus( (string)nReader[14]),
                     Remarks = (string)nReader[15]
                 });
             }
@@ -161,8 +161,8 @@ namespace TravelMS
                     Travel_Time_mm = (int)nReader[10],
                     First_Level_Approver = (string)nReader[11],
                     Agent_ID = (string)nReader[12],
-                    Request_Status = (string)nReader[13],
-                    Acco_Status = (string)nReader[14],
+                    Request_Status = StatusDetail.TravelRequestStatus((string)nReader[13]),
+                    Acco_Status =StatusDetail.AccoStatus( (string)nReader[14]),
                     Remarks = (string)nReader[15]
                 });
             }

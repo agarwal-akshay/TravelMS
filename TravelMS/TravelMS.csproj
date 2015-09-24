@@ -229,6 +229,7 @@
     <Compile Include="BizLayers\CheckApproverBiz.cs" />
     <Compile Include="BizLayers\LoginBizLayer.cs" />
     <Compile Include="BizLayers\ClaimRequestsBizLayer.cs" />
+    <Compile Include="BizLayers\StatusDetail.cs" />
     <Compile Include="BizLayers\TravelBizLayer.cs" />
     <Compile Include="BizLayers\User_IDCheckBizLayer.cs" />
     <Compile Include="Bootstrap Html Helpers\DatePickerFor.cs" />
@@ -459,6 +460,7 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Agent\Index.cshtml" />
     <Content Include="Views\Employee\NewClaimRequest.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

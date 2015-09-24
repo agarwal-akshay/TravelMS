@@ -128,7 +128,8 @@ namespace TravelMS.Controllers
 
                     WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
                     WebSecurity.Login(model.User_ID, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Message = "Registration Successful! <a href=\"/Home/Index\">Go to Home page</a>";
+                    return View("Success");
                 }
                 catch (MembershipCreateUserException e)
                 {
