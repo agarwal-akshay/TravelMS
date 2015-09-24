@@ -11,7 +11,7 @@ namespace TravelMS.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Travel Request ID")]
-        public List<string> Travel_Request_ID { get; set; }
+        public string Travel_Request_ID { get; set; }
 
         [Required]
         [StringLength(30, ErrorMessage = "Claim Request ID must be maximum 30 characters long.", MinimumLength = 1)]
@@ -21,7 +21,6 @@ namespace TravelMS.Models
 
         [Required]
         [Range(0,int.MaxValue, ErrorMessage="Claim Amount must be greater than zero.")]
-        [DataType(DataType.Currency)]
         [Display(Name = "Claim Amount")]
         public int Claim_Amount { get; set; }
 
