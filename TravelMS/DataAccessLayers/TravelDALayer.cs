@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebMatrix.WebData;
 
 namespace TravelMS
@@ -15,10 +16,10 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO TRAVEL_REQUESTS ([Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Remarks]) VALUES (@Travel_Request_ID,@Emp_ID,@Trip_Name,@Travel_Type_Purpose,@Travel_Date,@Mode_of_Travel,@Travel_Class,@Source_City,@Destination_City,@Travel_Time_hh,@Travel_Time_mm,@First_Level_Approver,@Agent_ID,@Remarks)");
+            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO TRAVEL_REQUESTS ([Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Remarks]) VALUES (@Emp_ID,@Trip_Name,@Travel_Type_Purpose,@Travel_Date,@Mode_of_Travel,@Travel_Class,@Source_City,@Destination_City,@Travel_Time_hh,@Travel_Time_mm,@First_Level_Approver,@Agent_ID,@Remarks)");
             insertCmmnd.CommandType = CommandType.Text;
 
-            insertCmmnd.Parameters.AddWithValue("@Travel_Request_ID", userData.Travel_Request_ID);
+            
             insertCmmnd.Parameters.AddWithValue("@Emp_ID", userData.Emp_ID);
             insertCmmnd.Parameters.AddWithValue("@Trip_Name", userData.Trip_Name);
             insertCmmnd.Parameters.AddWithValue("@Travel_Type_Purpose", userData.Travel_Type_Purpose);
@@ -44,7 +45,7 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand reqListCmmnd = new SqlCommand("SELECT * FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @CurUser_ID)");
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @CurUser_ID)");
 
             reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
 
@@ -87,7 +88,7 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand reqListCmmnd = new SqlCommand("SELECT * FROM TRAVEL_REQUESTS  WHERE Agent_ID = @CurAgent_ID AND REQUEST_STATUS='A'");
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS  WHERE Agent_ID = @CurAgent_ID AND REQUEST_STATUS='A'");
 
             reqListCmmnd.Parameters.AddWithValue("@CurAgent_ID", WebSecurity.CurrentUserName);
 
@@ -131,7 +132,7 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand reqListCmmnd = new SqlCommand("SELECT * FROM TRAVEL_REQUESTS  WHERE First_Level_Approver = @CurAgent_ID");
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS  WHERE First_Level_Approver = @CurAgent_ID");
 
             reqListCmmnd.Parameters.AddWithValue("@CurAgent_ID", WebSecurity.CurrentUserName);
 
@@ -187,6 +188,64 @@ namespace TravelMS
             if (rowsAffected == 1)
                 return true;
             return false;
+        }
+
+        public static string GetUserEmp_ID(string User_ID)
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand selectCmmnd = new SqlCommand("SELECT [Emp_ID] FROM EMPLOYEES WHERE [User_ID]=@User_ID");
+            selectCmmnd.CommandType = CommandType.Text;
+
+            selectCmmnd.Parameters.AddWithValue("@User_ID", User_ID);
+
+            object pHash = travelMSysDB.ExecuteScalar(selectCmmnd);
+
+            if (!(pHash == null))
+                return pHash.ToString();
+            throw new Exception("Emp_ID not found for User_ID=" + User_ID);
+        }
+
+        public static string GetNextReq_IDBiz()
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand selectCmmnd = new SqlCommand("SELECT IDENT_CURRENT('TRAVEL_REQUESTS')+1");
+            selectCmmnd.CommandType = CommandType.Text;
+
+            object num = travelMSysDB.ExecuteScalar(selectCmmnd);
+
+            string res;
+            if (!(num == null))
+            {
+                res = ("000000"+num.ToString());
+                res='R'+res.Substring(res.Length-6);
+                return res;
+            }
+            throw new Exception("auto increment row num for TRAVEL_REQUESTS not got");
+        }
+
+        //System.Web.Mvc vs. System.Web.WebPages.Html stackoverflow
+        public static IEnumerable<SelectListItem> AgentListDAL()
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Agent_ID],[Agent_Name] FROM AGENTS");
+
+            IDataReader nReader = travelMSysDB.ExecuteReader(reqListCmmnd);
+
+            List<SelectListItem> rList = new List<SelectListItem>();
+            while (nReader.Read())
+            {
+                rList.Add(new SelectListItem
+                {
+                    Text = (string)nReader[1],
+                    Value=(string)nReader[0]
+                });
+            }
+
+            nReader.Close();
+            return (IEnumerable < SelectListItem > )rList;
         }
     }
 }

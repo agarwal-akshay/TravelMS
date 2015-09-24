@@ -16,37 +16,59 @@
         /*$(document).ready(function () {
             document.getElementById("RegisterButton").disabled = true
         }
-        );
-        function checkAvailUser_ID() {
-            var serviceURL = '/AjaxMethods/User_IDCheck';
-            var User_ID = document.getElementById('User_ID').value;
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: { User_ID: User_ID },
-                dataType: "text",
-                success: successFunc,
-                error: errorFunc
-            });
+        );*/
+        
+        function MyOnLoad() {
+            PopulateClassList();
+            document.getElementById("Emp_ID").value = document.getElementById("UserEmp_ID").value;
+            document.getElementById("Emp_ID").contentEditable = false;
+            document.getElementById("Emp_ID").style.color = "gray";
+            document.getElementById("Travel_Request_ID").value = document.getElementById("NextReq_ID").value;
+            document.getElementById("Travel_Request_ID").contentEditable = false;
+            document.getElementById("Travel_Request_ID").style.color = "gray";
+        }
 
-            function successFunc(data, status) {
-                if (data == "1") {
-                    document.getElementById("RegisterButton").disabled = false;
-                    document.getElementById('User_ID').style.backgroundColor = 'lightgreen';
-                    alert("User ID Available");
-                }
-                else {
-                    document.getElementById('User_ID').style.backgroundColor = 'red';
-                    alert("User ID Not Available");
-                }
+        function PopulateClassList() {
+            mode = document.getElementById("Mode_of_Travel");
+            select = document.getElementById("Travel_Class");
+            select.innerHTML = "";
+            switch (mode.options[mode.selectedIndex].value) {
+                case "Air":
+                    var list = ["Economy", "Business"];
+                    for (var i = 0; i < list.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = list[i];
+                        opt.innerHTML = list[i];
+                        select.appendChild(opt);
+                    }
+                    break;
+                case "Rail":
+                    var list = ["IAC", "IIAC", "IIIAC", "SL"];
+                    for (var i = 0; i < list.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = list[i];
+                        opt.innerHTML = list[i];
+                        select.appendChild(opt);
+                    }
+                    break;
+                case "Bus":
+                    var list = ["Sleeper","Semi Sleeper","NonAC"];
+                    for (var i = 0; i < list.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = list[i];
+                        opt.innerHTML = list[i];
+                        select.appendChild(opt);
+                    }
+                    break;
             }
+        }
 
-            function errorFunc() {
-                alert('Error');
-            }
-        }*/
+        document.onload=MyOnLoad();
     </script>
 }
+
+<input type="hidden" id="UserEmp_ID" value="@ViewBag.UserEmp_ID" />
+<input type="hidden" id="NextReq_ID" value="@ViewBag.NextReq_ID" />
 
 @using (Html.BeginForm())
 {
@@ -83,7 +105,7 @@
                 @Html.LabelFor(m => m.Travel_Date)
                 @Html.EditorFor(m => m.Travel_Date)
             </li>
-            
+
             @{var travelModes = new List<SelectListItem>
                 {
                       new SelectListItem { Text = "Air", Value = "Air" },
@@ -93,13 +115,12 @@
             }
             <li>
                 @Html.LabelFor(m => m.Mode_of_Travel)
-                @Html.DropDownListFor(m => m.Mode_of_Travel, new SelectList(travelModes, "Value", "Text"))
+                @Html.DropDownListFor(m => m.Mode_of_Travel, new SelectList(travelModes, "Value", "Text"), new { onchange = "PopulateClassList();"})
             </li>
 
-            <!-- to do: dynamic list acc. to mode -->
-             <li>
+            <li>
                 @Html.LabelFor(m => m.Travel_Class)
-                @Html.TextBoxFor(m => m.Travel_Class)
+                @Html.DropDownListFor(m => m.Travel_Class, new SelectList(new List<SelectListItem>{new SelectListItem { Text = "Class", Value = "Class" }} , "Value", "Text"))
             </li>
 
             @{var cities = new List<SelectListItem>
@@ -119,18 +140,18 @@
 
             <li>
                 @Html.Label("Travel Time [hh:mm]")
-                @Html.TextBoxFor(m => m.Travel_Time_hh,new { style = "width:50px" })
+                @Html.TextBoxFor(m => m.Travel_Time_hh, new { style = "width:50px" })
                 :
-                @Html.TextBoxFor(m => m.Travel_Time_mm,new { style = "width:50px" })
+                @Html.TextBoxFor(m => m.Travel_Time_mm, new { style = "width:50px" })
             </li>
 
-             <li>
-                @Html.LabelFor(m => m.First_Level_Approver )
+            <li>
+                @Html.LabelFor(m => m.First_Level_Approver)
                 @Html.TextBoxFor(m => m.First_Level_Approver)@@comail.com
             </li>
-             <li>
+            <li>
                 @Html.LabelFor(m => m.Agent_ID)
-                @Html.TextBoxFor(m => m.Agent_ID)
+                @Html.DropDownListFor(m => m.Agent_ID, (IEnumerable<SelectListItem>)ViewBag.AgentList)
             </li>
             <li>
                 @Html.LabelFor(m => m.Remarks)

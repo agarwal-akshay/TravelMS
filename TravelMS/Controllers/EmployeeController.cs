@@ -20,6 +20,9 @@ namespace TravelMS.Controllers
 
         public ActionResult NewTravelRequest()
         {
+            ViewBag.UserEmp_ID = TravelBizLayer.TravelUserEmp_IDBiz(User.Identity.Name);
+            ViewBag.NextReq_ID = TravelBizLayer.TravelNextReq_IDBiz();
+            ViewBag.AgentList = TravelBizLayer.AgentListBiz();
             return View();
         }
 
@@ -27,6 +30,8 @@ namespace TravelMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult NewTravelRequest(NewTravelRequestModel model)
         {
+            ViewBag.UserEmp_ID=TravelBizLayer.TravelUserEmp_IDBiz(User.Identity.Name);
+            ViewBag.NextReq_ID=TravelBizLayer.TravelNextReq_IDBiz();
             if (ModelState.IsValid)
             {
                 try

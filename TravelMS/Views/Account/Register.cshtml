@@ -31,8 +31,8 @@
                 error: errorFunc
             });
 
-            function successFunc(data, status) {
-                if (data == true) {
+            function successFunc(data,status) {
+                if ((data == true) || (data=="True")) {
                     document.getElementById("RegisterButton").disabled = false;
                     document.getElementById("RegisterButton").removeAttribute("style");
                     document.getElementById('User_ID').style.backgroundColor = 'lightgreen';
@@ -69,8 +69,8 @@
               new SelectListItem { Text = "5", Value = "5" },
               new SelectListItem { Text = "6", Value = "6" }
         };
-        <fieldset>
-            <legend>New User Sign Up</legend>
+    <fieldset>
+        <legend>New User Sign Up</legend>
             <div class="editor-label">
                 @Html.LabelFor(m => m.User_ID)
             </div>
@@ -144,8 +144,8 @@
                 @Html.DropDownListFor(m => m.Job_Level, new SelectList(levelItems, "Value", "Text"))
                 @Html.ValidationMessageFor(m => m.Job_Level)
             </div>
-            <input type="submit" value="Register" id="RegisterButton" />
-        </fieldset>
+        <input type="submit" value="Register" id="RegisterButton" />
+    </fieldset>
 }
 <div>
     @Html.ActionLink("Back to Home Page", "Index", "Home")
