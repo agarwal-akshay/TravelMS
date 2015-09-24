@@ -40,7 +40,7 @@ namespace TravelMS.Controllers
                     if (!TravelBizLayer.TravelReqBiz(model))
                         return View("Error");
 
-                    ViewBag.Message = "Travel Request Registered! <a href=\"/Home/Index\">Go to Home page</a>";
+                    ViewBag.Message = "Travel Request Registered! <a href=\"/Employee\">Go to Home page</a>";
                     return View("Success");
                 }
                 catch (MembershipCreateUserException e)
