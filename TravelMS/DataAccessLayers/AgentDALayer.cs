@@ -14,7 +14,7 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO TICKET_BOOKINGS ([Travel_Request_ID],[Ticket_Details],[Booking_status]) VALUES (@Travel_Request_ID,@Ticket_Details,@Booking_Status)");
+            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO TICKET_BOOKINGS ([Travel_Request_ID],[Ticket_Details],[Booking_Status]) VALUES (@Travel_Request_ID,@Ticket_Details,@Booking_Status)");
             insertCmmnd.CommandType = CommandType.Text;
 
             insertCmmnd.Parameters.AddWithValue("@Travel_Request_ID", data.Travel_Request_ID);
@@ -23,7 +23,16 @@ namespace TravelMS
             
             int rowsAffected = travelMSysDB.ExecuteNonQuery(insertCmmnd);
             Console.Write("rowsAffected " + rowsAffected);
-            if (rowsAffected == 1)
+
+            SqlCommand updateCmmnd = new SqlCommand("UPDATE TRAVEL_REQUESTS SET [Request_Status]='P' WHERE Travel_Request_ID=@Travel_Request_ID");
+            updateCmmnd.CommandType = CommandType.Text;
+
+            updateCmmnd.Parameters.AddWithValue("@Travel_Request_ID", data.Travel_Request_ID);
+
+            int rowsAffectedTReq = travelMSysDB.ExecuteNonQuery(updateCmmnd);
+
+            //two booking records for same travel req issue to be resolved wherever applicable - or just delete the rows when booking cancelled
+            if (rowsAffected == 1&&rowsAffectedTReq==1)
                 return true;
             return false;
         }

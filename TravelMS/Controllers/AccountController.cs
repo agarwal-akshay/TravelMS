@@ -133,7 +133,8 @@ namespace TravelMS.Controllers
                         Roles.CreateRole(role);
                     Roles.AddUserToRole(model.User_ID, role);
                     WebSecurity.Login(model.User_ID, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Message = "Registration Successful! <a href=\"/Home/Index\">Go to Home page</a>";
+                    return View("Success");
                 }
                 catch (MembershipCreateUserException e)
                 {

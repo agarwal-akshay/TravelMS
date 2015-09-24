@@ -32,7 +32,6 @@ namespace TravelMS.Models
         [Display(Name = "Ticket Details")]
         public string Ticket_Details { get; set; }
 
-        [StringLength(1)]
         [DataType(DataType.Text)]
         [Display(Name = "Booking Status")]
         public string Booking_Status { get; set; }
