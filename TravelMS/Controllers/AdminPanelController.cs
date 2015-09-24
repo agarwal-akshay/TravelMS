@@ -71,6 +71,7 @@ namespace TravelMS.Controllers
                 var res = AdminPanelBizLayer.addAgent(model);
             }
             ModelState.Clear();
+            ViewBag.message = "Agent Created Successfully.";
             return View();
         }
 
