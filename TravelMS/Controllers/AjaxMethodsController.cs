@@ -18,16 +18,5 @@ namespace TravelMS.Controllers
             Console.WriteLine(Request.Params[0].ToString());
             return (User_IDCheckBizLayer.User_IDCheckBiz(User_ID));
         }
-        //
-        // POST: /AjaxMethods/unlockAccount
-
-        //[HttpPost]
-        //public bool unlockAccount(string User_ID)
-        //{
-        //    Console.WriteLine(Request.Params[0].ToString());
-        //    if (AdminPanelBizLayer.unlockAccount(User_ID))
-        //        return true;
-        //    return false;
-        //}
     }
 }

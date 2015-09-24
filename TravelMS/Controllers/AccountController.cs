@@ -13,7 +13,6 @@ using TravelMS.Models;
 
 namespace TravelMS.Controllers
 {
-    [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
@@ -23,6 +22,16 @@ namespace TravelMS.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (WebSecurity.IsAuthenticated)
+            {
+                string[] role = Roles.GetRolesForUser();
+                switch (role[0])
+                {
+                    case "Emp": return RedirectToAction("Index", "Employee");
+                    case "Admin": return RedirectToAction("Index", "AdminPanel");
+                    case "Agent": return RedirectToAction("Index", "Agent");
+                }
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -36,24 +45,38 @@ namespace TravelMS.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             string role=Request.Params["Role"];
-            if (!LoginBizLayer.LoginUserBiz(model,role))
+            if (LoginBizLayer.LoginUserBiz(model, role))
+            {
+                //if credentials are in app db but not in default websecurity db - like how admin/agent login without using register functionality
+                if (!WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
+                    WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
+
+                if (ModelState.IsValid && WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
+                {
+                    try
+                    {
+                        if (!Roles.RoleExists(role))
+                            Roles.CreateRole(role);
+                        if (!Roles.GetUsersInRole(role).Contains(model.User_ID))
+                            Roles.AddUserToRole(model.User_ID, role);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+
+                    return RedirectToLocal(returnUrl);
+                }
+
+                // If we got this far, something failed, redisplay form
+                ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                return View(model);
+            }
+            else
             {
                 ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 return View(model);
             }
-
-            //if credentials are in app db but not in default websecurity db - like how admin/agent login without using register functionality
-            if(!WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
-                WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
-
-            if (ModelState.IsValid && WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
-            }
-
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
         }
 
         //
@@ -74,6 +97,16 @@ namespace TravelMS.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (WebSecurity.IsAuthenticated)
+            {
+                string[] role = Roles.GetRolesForUser();
+                switch (role[0])
+                {
+                    case "Emp": return RedirectToAction("Index", "Employee");
+                    case "Admin": return RedirectToAction("Index", "AdminPanel");
+                    case "Agent": return RedirectToAction("Index", "Agent");
+                }
+            }
             return View();
         }
 

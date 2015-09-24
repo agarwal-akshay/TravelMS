@@ -29,16 +29,16 @@
             <th>Account Status</th>
         </tr>
     </thead>
-        <tbody>
-            @foreach (var item in Model)
+    <tbody>
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm())
             {
-                using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-                    @Html.Hidden("User_ID", item.User_ID)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("User_ID", item.User_ID)
                 <tr>
-                    <td><input type="submit" value="Unlock"/></td>
+                    <td><input type="submit" value="Unlock" /></td>
                     <td>@item.Emp_ID</td>
                     <td>@item.Emp_Name</td>
                     <td>@item.User_ID</td>
@@ -48,6 +48,9 @@
                     <td>@(string.Equals(item.Access_Status, "F") ? "Locked" : "Unlocked")</td>
                 </tr>
             }
-            }
-        </tbody>
+        }
+    </tbody>
 </table>
+<div>
+    @Html.ActionLink("Back to Dash", "Index")
+</div>

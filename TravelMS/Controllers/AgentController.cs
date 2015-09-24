@@ -9,7 +9,7 @@ using TravelMS.Models;
 
 namespace TravelMS.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Agent")]
     [InitializeSimpleMembership]
     public class AgentController : Controller
     {

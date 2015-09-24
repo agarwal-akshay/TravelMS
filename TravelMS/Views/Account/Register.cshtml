@@ -31,7 +31,7 @@
                 error: errorFunc
             });
 
-            function successFunc(data,status) {
+            function successFunc(data, status) {
                 if (data == true) {
                     document.getElementById("RegisterButton").disabled = false;
                     document.getElementById("RegisterButton").removeAttribute("style");
@@ -54,41 +54,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
-    <fieldset>
-        <legend>New User Sign Up</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.User_ID)
-                @Html.EditorFor(m => m.User_ID, new { @onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
-                <input id="Button1" type="button" value="Check User ID Availablity" onclick="checkAvailUser_ID()" />
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Emp_ID)
-                @Html.EditorFor(m => m.Emp_ID)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Emp_Name)
-                @Html.EditorFor(m => m.Emp_Name)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Gender)
-                @Html.RadioButtonFor(m => m.Gender, "M") Male
-                @Html.RadioButtonFor(m => m.Gender, "F") Female
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Date_of_Birth)
-                @Html.EditorFor(m => m.Date_of_Birth)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Date_of_Joining)
-                @Html.EditorFor(m => m.Date_of_Joining)
-            </li>
-@{
+    @Html.ValidationSummary(true)
     var locationItems = new List<SelectListItem>
         {
               new SelectListItem { Text = "Mumbai", Value = "Mumbai" },
@@ -103,18 +69,84 @@
               new SelectListItem { Text = "5", Value = "5" },
               new SelectListItem { Text = "6", Value = "6" }
         };
-        }
-            <li>
+        <fieldset>
+            <legend>New User Sign Up</legend>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User_ID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.User_ID, new { @onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
+                @Html.ValidationMessageFor(m => m.User_ID)
+                <input id="Button1" type="button" value="Check Availablity" onclick="checkAvailUser_ID()" />
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Password)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Emp_ID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Emp_ID)
+                @Html.ValidationMessageFor(m => m.Emp_ID)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Emp_Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Emp_Name)
+                @Html.ValidationMessageFor(m => m.Emp_Name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Gender)
+            </div>
+            <div class="radio-inline">
+                @Html.RadioButtonFor(m => m.Gender, "M") Male
+                @Html.RadioButtonFor(m => m.Gender, "F") Female
+                @Html.ValidationMessageFor(m => m.Gender)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Date_of_Birth)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Date_of_Birth)
+                @Html.ValidationMessageFor(m => m.Date_of_Birth)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Date_of_Joining)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Date_of_Joining)
+                @Html.ValidationMessageFor(m => m.Date_of_Joining)
+            </div>
+
+            <div class="editor-label">
                 @Html.LabelFor(m => m.Job_Location)
+            </div>
+            <div class="dropdown">
                 @Html.DropDownListFor(m => m.Job_Location, new SelectList(locationItems, "Value", "Text"))
-            </li>
-            <li>
+                @Html.ValidationMessageFor(m => m.Job_Location)
+            </div>
+
+            <div class="editor-label">
                 @Html.LabelFor(m => m.Job_Level)
+            </div>
+            <div class="dropdown">
                 @Html.DropDownListFor(m => m.Job_Level, new SelectList(levelItems, "Value", "Text"))
-            </li>
-        </ol>
-        <input type="submit" value="Register" id="RegisterButton" />
-    </fieldset>
+                @Html.ValidationMessageFor(m => m.Job_Level)
+            </div>
+            <input type="submit" value="Register" id="RegisterButton" />
+        </fieldset>
 }
-
-
+<div>
+    @Html.ActionLink("Back to Home Page", "Index", "Home")
+</div>

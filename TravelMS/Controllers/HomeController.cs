@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using WebMatrix.WebData;
 
 namespace TravelMS.Controllers
 {
@@ -10,22 +12,17 @@ namespace TravelMS.Controllers
     {
         public ActionResult Index()
         {
+            if (WebSecurity.IsAuthenticated)
+            {
+                string[] role = Roles.GetRolesForUser();
+                switch (role[0])
+                {
+                    case "Emp": return RedirectToAction("Index", "Employee");
+                    case "Admin": return RedirectToAction("Index", "AdminPanel");
+                    case "Agent": return RedirectToAction("Index", "Agent");
+                }
+            }
             ViewBag.Message = "A convenient tool for employees' travel needs.";
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "App description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Contact page.";
-
             return View();
         }
     }

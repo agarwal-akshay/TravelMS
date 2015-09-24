@@ -8,19 +8,24 @@
 </hgroup>
 
 @{
-    @Html.ValidationSummary(true)
-    <h3>Employee Details</h3>
-    @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel");
-    <br />
-    @Html.ActionLink("Reset Password", "reset", "AdminPanel");
-    <br />
-    @Html.ActionLink("Settle Claims", "settle", "AdminPanel");
-    <br />
-    @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel");
-    <h3>Agent Details</h3>
-    @Html.ActionLink("Add New Agent", "addAgent", "AdminPanel");
-    <br />
-    @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel");
+    <ol class="round">
+        <li class="one">
+            <h5>Employee Details</h5>
+            @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel")
+            <br/>
+            @Html.ActionLink("Reset Password", "reset", "AdminPanel")
+            <br />
+            @Html.ActionLink("Settle Claims", "settle", "AdminPanel")
+            <br />
+            @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel")
+        </li>
+        <li class="two">
+            <h5>Agent Details</h5>
+            @Html.ActionLink("Add New Agent", "addAgent", "AdminPanel")
+            <br />
+            @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel")
+        </li>
+    </ol>
 }
 
 @section Scripts {

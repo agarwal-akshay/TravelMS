@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 
 namespace TravelMS
 {
@@ -27,16 +28,19 @@ namespace TravelMS
             {
                 if (LoginDALayer.LoginUserDAL(userData))
                     return true;
+                return false;
             }
             else if (role.Equals("Admin"))
             {
                 if (LoginDALayer.LoginAdminDAL(userData))
                     return true;
+                return false;
             }
             else if (role.Equals("Agent"))
             {
                 if (LoginDALayer.LoginAgentDAL(userData))
                     return true;
+                return false;
             }
             return false;
         }

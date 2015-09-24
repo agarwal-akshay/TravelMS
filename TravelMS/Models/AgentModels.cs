@@ -55,7 +55,7 @@ namespace TravelMS.Models
         public string Agent_Name { get; set; }
 
         [Required]
-        [StringLength(30, MinimumLength = 1, ErrorMessage = "The Agent Name must be maximum 30 characters long.")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "The Address must be maximum 50 characters long.")]
         //[RegularExpression(@"^(?!.*\s).*$", ErrorMessage = "This field can't have spaces.")]
         [DataType(DataType.Text)]
         [Display(Name = "Address")]

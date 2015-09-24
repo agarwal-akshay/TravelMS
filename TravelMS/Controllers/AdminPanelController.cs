@@ -13,17 +13,17 @@ using TravelMS.Models;
 
 namespace TravelMS.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [InitializeSimpleMembership]
     public class AdminPanelController : Controller
     {
         //
         // GET: /AdminPanel/
-        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
         public ActionResult lockedAccounts()
         {
             List<RegisterModel> modelList = AdminPanelBizLayer.lockedAccounts();
@@ -31,7 +31,6 @@ namespace TravelMS.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult lockedAccounts(List<RegisterModel> modelList, string User_ID)
         {
@@ -41,32 +40,28 @@ namespace TravelMS.Controllers
             return View(updatedmodelList);
         }
 
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult reset()
         {
             return View();
         }
 
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult settle()
         {
             return View();
         }
-        [Authorize]
+
         public ActionResult closedRequests()
         {
             return View();
         }
 
-        [Authorize]
         public ActionResult addAgent()
         {
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult addAgent(AgentModel model)
@@ -79,7 +74,6 @@ namespace TravelMS.Controllers
             return View();
         }
 
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult manageAgent()
         {

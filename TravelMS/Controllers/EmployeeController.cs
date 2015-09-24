@@ -9,7 +9,7 @@ using TravelMS.Models;
 
 namespace TravelMS.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Emp")]
     [InitializeSimpleMembership]
     public class EmployeeController : Controller
     {        
@@ -72,6 +72,36 @@ namespace TravelMS.Controllers
             if(!TravelBizLayer.ApproveRejBiz(Request.Params["Req_ID"], 'R'))
                 return View("Error");
             return RedirectToAction("ViewApproveRejRequests","Employee");
+        }
+
+        public ActionResult NewClaimRequest()
+        {
+            var travelRequests = ClaimRequestsBizLayer.populateTravelRequests(User.Identity.Name);
+            ViewBag.travelRequests = travelRequests;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewClaimRequest(ClaimRequestsModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (!ClaimRequestsBizLayer.NewClaimRequest(model))
+                        return View("Error");
+
+                    return RedirectToAction("Index", "Employee");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

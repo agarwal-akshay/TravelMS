@@ -1,0 +1,60 @@
+﻿@model TravelMS.Models.ClaimRequestsModel
+
+@{
+    ViewBag.Title = "NewClaimRequest";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ClaimRequestsModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Travel_Request_ID)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Travel_Request_ID, (IEnumerable<SelectListItem>)ViewBag.travelRequests)
+            @Html.ValidationMessageFor(model => model.Travel_Request_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Claim_Request_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Claim_Request_ID)
+            @Html.ValidationMessageFor(model => model.Claim_Request_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Claim_Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Claim_Amount)
+            @Html.ValidationMessageFor(model => model.Claim_Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit Request" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Dash", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
