@@ -57,7 +57,7 @@ namespace TravelMS.Controllers
                     {
                         if (!Roles.RoleExists(role))
                             Roles.CreateRole(role);
-                        if (!Roles.GetUsersInRole(role).Contains(model.User_ID))
+                        if (!Roles.GetRolesForUser(model.User_ID).Contains(role))
                             Roles.AddUserToRole(model.User_ID, role);
                     }
                     catch (Exception)
@@ -126,7 +126,12 @@ namespace TravelMS.Controllers
                     if (!RegisterBizLayer.RegisterUserBiz(model))
                         return View("Error");
 
+                    string role = "Emp";
+
                     WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
+                    if (!Roles.RoleExists(role))
+                        Roles.CreateRole(role);
+                    Roles.AddUserToRole(model.User_ID, role);
                     WebSecurity.Login(model.User_ID, model.Password);
                     ViewBag.Message = "Registration Successful! <a href=\"/Home/Index\">Go to Home page</a>";
                     return View("Success");
