@@ -4,13 +4,6 @@
     ViewBag.Title = "Log in";
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script>
-    document.getElementById("Role").checked = "checked";
-</script>
-}
-
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
@@ -54,9 +47,12 @@
     }
 </section>
 
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+<script>
+    document.getElementById("Role").checked = "checked";
+</script>
+@*<section class="social" id="socialLoginForm">
+        <h2>Use another service to log in.</h2>
+        @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+    </section>*@
 
 

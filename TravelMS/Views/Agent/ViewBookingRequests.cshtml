@@ -5,21 +5,8 @@
     ViewBag.Title = "List of booking requests submitted to the travel agent";
 }
 
-
-<style>
-    table, td, th {
-        border: 1px solid green;
-        /*border-collapse:collapse;*/
-    }
-
-    th {
-        background-color: darkgreen;
-        color: white;
-    }
-</style>
-
 <h2>View Booking Requests</h2>
-<table>
+<table class="table table-striped">
     <tr>
         <th>Booking Link</th>
         <th>Travel Request ID</th>
@@ -42,7 +29,7 @@
     @foreach (var item in @Model)
     {
         <tr>
-            @using (Html.BeginForm("BookTicket","Agent"))
+            @using (Html.BeginForm("BookTicket", "Agent"))
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("Emp_ID", @item.Emp_ID)
@@ -52,74 +39,32 @@
                 @Html.Hidden("Travel_Time_hh", @item.Travel_Time_hh)
                 @Html.Hidden("Travel_Time_mm", @item.Travel_Time_mm)
                 @Html.Hidden("Remarks", @item.Remarks)
-                @Html.Hidden("Source",@item.Source_City)
-                @Html.Hidden("Destination",@item.Destination_City)
-                @Html.Hidden("Req_ID",@item.Travel_Request_ID)
+                @Html.Hidden("Source", @item.Source_City)
+                @Html.Hidden("Destination", @item.Destination_City)
+                @Html.Hidden("Req_ID", @item.Travel_Request_ID)
                 <td>
                     <input type="submit" value="Book" id="bookButton" />
                 </td>
             }
-            <td>
-                @(item.Travel_Request_ID)
-            </td>
-            <td>
-                @(item.Emp_ID)
-            </td>
-            <td>
-                @(item.Trip_Name)
-            </td>
-
-            <td>
-                @(item.Travel_Type_Purpose)
-            </td>
-
-            <td>
-                @(item.Travel_Date)
-            </td>
-            <td>
-                @(item.Mode_of_Travel)
-            </td>
-
-            <td>
-                @(item.Travel_Class)
-            </td>
-
-            <td>
-                @(item.Source_City)
-            </td>
-
-            <td>
-                @(item.Destination_City)
-            </td>
-
-            <td>
-                @(item.Travel_Time_hh):@(item.Travel_Time_mm)
-            </td>
-
-            <td>
-                @(item.First_Level_Approver)
-            </td>
-
-            <td>
-                @(item.Agent_ID)
-            </td>
-
-            <td>
-                @(item.Request_Status)
-            </td>
-
-            <td>
-                @(item.Acco_Status)
-            </td>
-
-            <td>
-                @(item.Remarks)
-            </td>
+            <td>@(item.Travel_Request_ID)</td>
+            <td>@(item.Emp_ID)</td>
+            <td>@(item.Trip_Name)</td>
+            <td>@(item.Travel_Type_Purpose)</td>
+            <td>@(item.Travel_Date)</td>
+            <td>@(item.Mode_of_Travel)</td>
+            <td>@(item.Travel_Class)</td>
+            <td>@(item.Source_City)</td>
+            <td>@(item.Destination_City)</td>
+            <td>@(item.Travel_Time_hh):@(item.Travel_Time_mm)</td>
+            <td>@(item.First_Level_Approver)</td>
+            <td>@(item.Agent_ID)</td>
+            <td>@(item.Request_Status)</td>
+            <td>@(item.Acco_Status)</td>
+            <td>@(item.Remarks)</td>
         </tr>
     }
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=(model[0]).PrimaryKey */ }) |
     @Html.ActionLink("Back to Dash", "Index")
 </p>
 

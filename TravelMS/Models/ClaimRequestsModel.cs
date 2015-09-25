@@ -20,11 +20,12 @@ namespace TravelMS.Models
         public string Claim_Request_ID { get; set; }
 
         [Required]
-        [Range(0,int.MaxValue, ErrorMessage="Claim Amount must be greater than zero.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Claim Amount must be greater than zero.")]
         [Display(Name = "Claim Amount")]
         public int Claim_Amount { get; set; }
 
-        [StringLength(50, ErrorMessage = "Please use only 50 or less characters.")]
+        [Required]
+        [StringLength(30, ErrorMessage = "Please use only 30 or less characters.")]
         [DataType(DataType.Text)]
         [Display(Name = "Remarks")]
         public string Remarks { get; set; }

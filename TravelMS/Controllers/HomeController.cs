@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using TravelMS.Filters;
 using WebMatrix.WebData;
 
 namespace TravelMS.Controllers
 {
+    [InitializeSimpleMembership]
     public class HomeController : Controller
     {
         public ActionResult Index()

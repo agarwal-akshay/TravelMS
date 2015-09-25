@@ -63,6 +63,7 @@ namespace TravelMS.Models
 
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(30,MinimumLength=6)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
@@ -95,7 +96,7 @@ namespace TravelMS.Models
 
         [Required]
         [StringLength(30, ErrorMessage = "The Password must be maximum 30 characters long.", MinimumLength = 6)]
-        [RegularExpression(@"^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?!.*\s).*$",
+        [RegularExpression(@"^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])(?!.*\s).*$",
                     ErrorMessage = "Password must have at least 1 special character(!@#$%^&*), 1 upper case character and a digit.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

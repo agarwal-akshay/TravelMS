@@ -84,6 +84,7 @@ namespace TravelMS.Controllers
         public ActionResult NewClaimRequest()
         {
             var travelRequests = ClaimRequestsBizLayer.populateTravelRequests(User.Identity.Name);
+            ViewBag.nextClaimID = ClaimRequestsBizLayer.nextClaimID();
             ViewBag.travelRequests = travelRequests;
             return View();
         }

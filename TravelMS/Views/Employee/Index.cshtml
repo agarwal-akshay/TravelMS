@@ -4,7 +4,6 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>@*@User.Identity.Name*@</h2>
 </hgroup>
 
 @{
@@ -30,8 +29,4 @@
             @Html.ActionLink("Approve/Reject Requests", "ViewApproveRejRequests", "Employee")
         </li>
     </ol>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

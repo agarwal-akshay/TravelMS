@@ -3,27 +3,9 @@
 @{
     ViewBag.Title = "BookTicket";
 }
-
-<style>
-    table, td, th {
-        border: 1px solid green;
-        /*border-collapse:collapse;*/
-    }
-
-    th {
-        background-color: darkgreen;
-        color: white;
-    }
-</style>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script>
-        document.getElementById('Travel_Request_ID').value = "@Request.Params["Req_ID"]";
-    </script>
-}
-
+<script>
+    document.getElementById('Travel_Request_ID').value = "@Request.Params["Req_ID"]";
+</script>
 
 <h2>BookTicket</h2>
 
@@ -35,7 +17,7 @@
     <fieldset>
         <legend>TicketBooking</legend>
 
-        <table>
+        <table class="table table-striped">
             <tr>
                 <th>Employee ID</th>
                 <th>Mode of Travel</th>
@@ -54,38 +36,27 @@
             </tr>
         </table>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Travel_Request_ID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Travel_Request_ID)
-            @Html.ValidationMessageFor(model => model.Travel_Request_ID)
-        </div>
+        @Html.LabelFor(model => model.Travel_Request_ID)
+        @Html.EditorFor(model => model.Travel_Request_ID)
+        @Html.ValidationMessageFor(model => model.Travel_Request_ID)
 
-        @Html.Label("Source_City","Source City")
-        @Html.TextBox("Source_City_Box",@Request.Params["Source"])
+        @Html.Label("Source_City", "Source City")
+        @Html.TextBox("Source_City_Box", @Request.Params["Source"])
 
-        @Html.Label("Destination_City","Destination City")
-        @Html.TextBox("Destination_City_Box",@Request.Params["Destination"])
+        @Html.Label("Destination_City", "Destination City")
+        @Html.TextBox("Destination_City_Box", @Request.Params["Destination"])
 
-        @Html.Label("Date","Travel Date")
-        @Html.TextBox("Date_Box",DateTime.Parse(@Request.Params["Travel_Date"]).Date)
+        @Html.Label("Date", "Travel Date")
+        @Html.TextBox("Date_Box", DateTime.Parse(@Request.Params["Travel_Date"]).Date)
 
-        @Html.Label("Time","Time")
-        @Html.TextBox("Time_Box_hh", @Request.Params["Travel_Time_hh"], new {style="width:30px"}) : @Html.TextBox("Time_Box_mm",@Request.Params["Travel_Time_mm"],new {style="width:30px"})
+        @Html.Label("Time", "Time")
+        @Html.TextBox("Time_Box_hh", @Request.Params["Travel_Time_hh"], new { style = "width:30px" }) : @Html.TextBox("Time_Box_mm", @Request.Params["Travel_Time_mm"], new { style = "width:30px" })
 
+        @Html.LabelFor(model => model.Ticket_Details)
+        @Html.EditorFor(model => model.Ticket_Details)
+        @Html.ValidationMessageFor(model => model.Ticket_Details)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ticket_Details)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ticket_Details)
-            @Html.ValidationMessageFor(model => model.Ticket_Details)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        <input type="submit" value="Create" />
     </fieldset>
 }
 

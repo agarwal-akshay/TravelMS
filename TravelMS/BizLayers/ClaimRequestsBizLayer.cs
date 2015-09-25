@@ -35,5 +35,10 @@ namespace TravelMS
             }
             return lstObj;
         }
+
+        public static string nextClaimID()
+        {
+            return ClaimRequestsDALayer.nextClaimID();
+        }
     }
 }

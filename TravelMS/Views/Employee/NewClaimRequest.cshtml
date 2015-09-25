@@ -54,7 +54,10 @@
 <div>
     @Html.ActionLink("Back to Dash", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script type="text/javascript">
+    $(document).ready(function() {
+        document.getElementById("Claim_Request_ID").value = "@ViewBag.nextClaimID";
+        document.getElementById("Claim_Request_ID").readOnly = true;
+        document.getElementById("Claim_Request_ID").style.color = "gray";
+    })
+</script>
