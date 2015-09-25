@@ -133,7 +133,7 @@ namespace TravelMS.Controllers
                         Roles.CreateRole(role);
                     Roles.AddUserToRole(model.User_ID, role);
                     WebSecurity.Login(model.User_ID, model.Password);
-                    ViewBag.Message = "Registration Successful! <a href=\"/Home/Index\">Go to Home page</a>";
+                    ViewBag.Message = "Registration Successful! <a href=\"/Employee\">Go to Home page</a>";
                     return View("Success");
                 }
                 catch (MembershipCreateUserException e)
@@ -148,7 +148,7 @@ namespace TravelMS.Controllers
 
         //
         // POST: /Account/Disassociate
-
+        //
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)

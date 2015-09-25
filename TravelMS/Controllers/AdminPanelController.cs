@@ -71,7 +71,7 @@ namespace TravelMS.Controllers
                 var res = AdminPanelBizLayer.addAgent(model);
             }
             ModelState.Clear();
-            ViewBag.Message = "Agent Addition Successful! <a href=\"/Home/Index\">Go to Home page</a>";
+            ViewBag.Message = "Agent Addition Successful! <a href=\"/Admin\">Go to Home page</a>";
             return View("Success");
         }
 

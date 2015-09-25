@@ -47,7 +47,7 @@ namespace TravelMS.Controllers
                     if (!AgentBizLayer.BookTicketBiz(model))
                         return View("Error");
 
-                    ViewBag.Message = "Ticket Booking Successful! <a href=\"/Home/Index\">Go to Home page</a>";
+                    ViewBag.Message = "Ticket Booking Successful! <a href=\"/Agent\">Go to Home page</a>";
                     return View("Success");
                 }
                 catch (MembershipCreateUserException e)
