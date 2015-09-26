@@ -17,12 +17,6 @@ namespace TravelMS
             return false;
         }
 
-        //public static List<Models.NewTravelRequestModel> GetRequestList()
-        //{
-        //    List<Models.NewTravelRequestModel> reqList=TravelDALayer.GetRequestList();
-        //    return reqList;
-        //}
-
         public static IEnumerable<SelectListItem> populateTravelRequests(string currUserID)
         {
             var lstObj = new List<SelectListItem>();
@@ -39,6 +33,12 @@ namespace TravelMS
         public static string nextClaimID()
         {
             return ClaimRequestsDALayer.nextClaimID();
+        }
+
+        public static List<ClaimRequestsModel> ViewClaimRequests()
+        {
+            List<ClaimRequestsModel> reqList = ClaimRequestsDALayer.ViewClaimRequests();
+            return reqList;
         }
     }
 }

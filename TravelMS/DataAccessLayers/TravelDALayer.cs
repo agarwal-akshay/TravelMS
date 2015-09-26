@@ -51,7 +51,7 @@ namespace TravelMS
 
             IDataReader nReader = travelMSysDB.ExecuteReader(reqListCmmnd);
 
-            List<Models.NewTravelRequestModel> rList = new List<Models.NewTravelRequestModel>();
+            var rList = new List<Models.NewTravelRequestModel>();
 
             /*Object[] values = new Object[16];
             nReader.GetValues(values);*/

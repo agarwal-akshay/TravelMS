@@ -16,11 +16,12 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
-            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_Amount],[Emp_Remarks]) VALUES (@Travel_Request_ID,@Claim_Amount,@Remarks)");
+            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks]) VALUES (@Travel_Request_ID,@Claim_Amount,@Settled_Amount,@Remarks)");
             insertCmmnd.CommandType = CommandType.Text;
 
             insertCmmnd.Parameters.AddWithValue("@Travel_Request_ID", claimData.Travel_Request_ID);
             insertCmmnd.Parameters.AddWithValue("@Claim_Amount", claimData.Claim_Amount);
+            insertCmmnd.Parameters.AddWithValue("@Settled_Amount", 0);
             insertCmmnd.Parameters.AddWithValue("@Remarks", claimData.Remarks);
 
             int rowsAffected = travelMSysDB.ExecuteNonQuery(insertCmmnd);
@@ -58,6 +59,40 @@ namespace TravelMS
                 return res;
             }
             throw new Exception("Next Claim Request Failed.");
+        }
+
+        public static List<ClaimRequestsModel> ViewClaimRequests()
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Claim_ID],[Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks],[Admin_Remarks],[Claim_Status],[Admin_ID] FROM CLAIM_REQUESTS WHERE Travel_Request_ID IN (SELECT Travel_Request_ID FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @CurUser_ID))");
+
+            reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
+
+            IDataReader dr = travelMSysDB.ExecuteReader(reqListCmmnd);
+
+            var rList = new List<ClaimRequestsModel>();
+
+            /*Object[] values = new Object[16];
+            dr.GetValues(values);*/
+
+            while (dr.Read())
+            {
+                rList.Add(new ClaimRequestsModel
+                {
+                    Claim_ID = dr.GetString(0),
+                    Travel_Request_ID = dr.GetString(1),
+                    Claim_Amount = dr.GetInt32(2),
+                    Settled_Amount = dr.GetInt32(3),
+                    Remarks = dr.GetString(4),
+                    Admin_Remarks = dr.GetString(5),
+                    Claim_Status = dr.GetChar(6),
+                    Admin_ID = dr.GetString(7)
+                });
+            }
+
+            dr.Close();
+            return rList;
         }
     }
 }

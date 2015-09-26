@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TravelMS.Models.ClaimRequestsModel>
+
+@{
+    ViewBag.Title = "ViewClaimRequests";
+}
+
+<h2>View Claim Requests</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Request_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claim_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claim_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Settled_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin_Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claim_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Travel_Request_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claim_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claim_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Settled_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin_Remarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claim_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.ActionLink("Select", "Select", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

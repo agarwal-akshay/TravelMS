@@ -112,6 +112,12 @@ namespace TravelMS.Controllers
             return View(model);
         }
 
+        public ActionResult ViewClaimRequests()
+        {
+            List<ClaimRequestsModel> model = ClaimRequestsBizLayer.ViewClaimRequests();
+            return View(model);
+        }
+
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
