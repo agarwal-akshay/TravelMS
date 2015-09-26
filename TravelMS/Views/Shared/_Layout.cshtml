@@ -6,7 +6,6 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
@@ -21,11 +20,6 @@
                 <section id="login">
                     @Html.Partial("_LoginPartial")
                 </section>
-                @*<nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("My Dashboard", "Index", "Home")</li>
-                    </ul>
-                </nav>*@
             </div>
         </div>
     </header>
@@ -43,13 +37,13 @@
         </div>
     </footer>
     <script>
-    $(document).on('click', '[type="submit"][data-form-action]', function (event) {
-        var $this = $(this);
-        var formAction = $this.attr('data-form-action');
-        $this.parent().attr('action', formAction);
-    });
-    var test = 2;
-    //from http://stackoverflow.com/questions/21116999/posting-form-to-different-mvc-post-action-depending-on-the-clicked-submit-button
+        $(document).on('click', '[type="submit"][data-form-action]', function (event) {
+            var $this = $(this);
+            var formAction = $this.attr('data-form-action');
+            $this.parent().attr('action', formAction);
+        });
+        var test = 2;
+        //from http://stackoverflow.com/questions/21116999/posting-form-to-different-mvc-post-action-depending-on-the-clicked-submit-button
     </script>
 </body>
 </html>

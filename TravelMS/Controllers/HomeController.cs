@@ -24,7 +24,6 @@ namespace TravelMS.Controllers
                     case "Agent": return RedirectToAction("Index", "Agent");
                 }
             }
-            ViewBag.Message = "A convenient tool for employees' travel needs.";
             return View();
         }
     }

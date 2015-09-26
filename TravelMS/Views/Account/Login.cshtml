@@ -17,12 +17,11 @@
 
         <fieldset>
             <legend>Log in Form</legend>
-            @Html.RadioButton("Role", "Emp", new { style = "width:auto;" }) Employee
+            @Html.RadioButton("Role", "Emp", new { @checked = "checked" }) Employee
             <br />
-            @Html.RadioButton("Role", "Admin", new { style = "width:auto;" }) Admin
+            @Html.RadioButton("Role", "Admin") Admin
             <br />
-            @Html.RadioButton("Role", "Agent", new { style = "width:auto;" }) Agent
-            <br />
+            @Html.RadioButton("Role", "Agent") Agent
             <ol>
                 <li>
                     @Html.LabelFor(m => m.User_ID)
@@ -46,13 +45,7 @@
         </p>
     }
 </section>
-
-<script>
-    document.getElementById("Role").checked = "checked";
-</script>
 @*<section class="social" id="socialLoginForm">
         <h2>Use another service to log in.</h2>
         @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
     </section>*@
-
-
