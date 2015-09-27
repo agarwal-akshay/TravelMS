@@ -19,8 +19,7 @@ namespace TravelMS
 
             queryCmmnd.Parameters.AddWithValue("@User_ID", requestedUser_ID);
 
-            IDataReader resReader = travelMSysDB.ExecuteReader(queryCmmnd);
-            return resReader;
+            return travelMSysDB.ExecuteReader(queryCmmnd);
         }
     }
 }

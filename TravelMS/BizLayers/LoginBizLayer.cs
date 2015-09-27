@@ -15,7 +15,7 @@ namespace TravelMS
             MD5 hasher = MD5.Create();
             byte[] data = hasher.ComputeHash(Encoding.UTF8.GetBytes(userData.Password));
 
-            StringBuilder sBuilder = new StringBuilder();
+            var sBuilder = new StringBuilder();
 
             for (int i = 0; i < data.Length; i++)
             {

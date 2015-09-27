@@ -18,6 +18,7 @@ namespace TravelMS
                 Console.WriteLine(resReader.GetString(0));
                 return false;
             }
+            resReader.Close();
             return true;
         }
     }

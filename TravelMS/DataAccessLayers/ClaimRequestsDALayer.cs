@@ -61,7 +61,7 @@ namespace TravelMS
             throw new Exception("Next Claim Request Failed.");
         }
 
-        public static List<ClaimRequestsModel> ViewClaimRequests()
+        public static IDataReader ViewClaimRequests()
         {
             SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
@@ -69,30 +69,7 @@ namespace TravelMS
 
             reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
 
-            IDataReader dr = travelMSysDB.ExecuteReader(reqListCmmnd);
-
-            var rList = new List<ClaimRequestsModel>();
-
-            /*Object[] values = new Object[16];
-            dr.GetValues(values);*/
-
-            while (dr.Read())
-            {
-                rList.Add(new ClaimRequestsModel
-                {
-                    Claim_ID = dr.GetString(0),
-                    Travel_Request_ID = dr.GetString(1),
-                    Claim_Amount = dr.GetInt32(2),
-                    Settled_Amount = dr.GetInt32(3),
-                    Remarks = dr.GetString(4),
-                    Admin_Remarks = dr.GetString(5),
-                    Claim_Status = dr.GetChar(6),
-                    Admin_ID = dr.GetString(7)
-                });
-            }
-
-            dr.Close();
-            return rList;
+            return travelMSysDB.ExecuteReader(reqListCmmnd);
         }
     }
 }

@@ -25,8 +25,11 @@ namespace TravelMS.Models
         public int Claim_Amount { get; set; }
 
         public int Settled_Amount { get; set; }
+        
         public string Admin_Remarks { get; set; }
-        public char Claim_Status { get; set; }
+        
+        public string Claim_Status { get; set; }
+
         public string Admin_ID { get; set; }
 
         [Required]

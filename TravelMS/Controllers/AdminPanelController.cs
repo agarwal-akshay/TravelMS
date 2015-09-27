@@ -26,7 +26,7 @@ namespace TravelMS.Controllers
 
         public ActionResult lockedAccounts()
         {
-            List<RegisterModel> modelList = AdminPanelBizLayer.lockedAccounts();
+            var modelList = AdminPanelBizLayer.lockedAccounts();
             return View(modelList);
         }
 
@@ -36,7 +36,7 @@ namespace TravelMS.Controllers
         {
             var res = AdminPanelBizLayer.unlockAccount(User_ID);
             ModelState.Clear();
-            List<RegisterModel> updatedmodelList = AdminPanelBizLayer.lockedAccounts();
+            var updatedmodelList = AdminPanelBizLayer.lockedAccounts();
             return View(updatedmodelList);
         }
 

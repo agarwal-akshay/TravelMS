@@ -55,14 +55,14 @@ namespace TravelMS.Controllers
 
         public ActionResult ViewTravelRequests()
         {
-            List<NewTravelRequestModel> model = TravelBizLayer.GetRequestList();
-            return View(model);            
+            var modelList = TravelBizLayer.GetRequestList();
+            return View(modelList);            
         }
 
         public ActionResult ViewApproveRejRequests()
         {
-            List<NewTravelRequestModel> model = TravelBizLayer.GetApproveRejRequestList();
-            return View(model);
+            var modelList = TravelBizLayer.GetApproveRejRequestList();
+            return View(modelList);
         }
 
         [HttpPost]
@@ -114,7 +114,7 @@ namespace TravelMS.Controllers
 
         public ActionResult ViewClaimRequests()
         {
-            List<ClaimRequestsModel> model = ClaimRequestsBizLayer.ViewClaimRequests();
+            var model = ClaimRequestsBizLayer.ViewClaimRequests();
             return View(model);
         }
 

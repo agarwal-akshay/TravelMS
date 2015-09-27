@@ -6,9 +6,6 @@
 
 <h2>View Claim Requests</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
@@ -65,8 +62,7 @@
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
         <td>
-            @Html.ActionLink("Select", "Select", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @*@Html.ActionLink("Select", "Select", new { /* id=item.PrimaryKey */ })*@
         </td>
     </tr>
 }
