@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TravelMS.Models.ClaimRequestsModel>
 
 @{
-    ViewBag.Title = "ViewClaimRequests";
+    ViewBag.Title = "Closed Requests";
 }
 
-<h2>View Claim Requests</h2>
+<h2>My Closed Requests</h2>
 
 <table>
     <tr>
@@ -60,11 +60,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
-        <td>
-            @*@Html.ActionLink("Select", "Select", new { /* id=item.PrimaryKey */ })*@
-        </td>
     </tr>
 }
+
 </table>
 <div>
     @Html.ActionLink("Back to Dash", "Index")

@@ -35,6 +35,17 @@ namespace TravelMS
                 return "Not Booked";
             return "Invalid status";
         }
+
+        public static string ClaimStatus(string s)
+        {
+            if (s.Equals("S"))
+                return "Submitted";
+            else if (s.Equals("Y"))
+                return "Settled";
+            return "Invalid status";
+        }
+
+
         public static string AccoStatus(string s)
         {
             if (s.Equals("Y"))

@@ -54,7 +54,8 @@ namespace TravelMS.Controllers
 
         public ActionResult closedRequests()
         {
-            return View();
+            var model = ClaimRequestsBizLayer.ViewClosedRequests();
+            return View(model);
         }
 
         [HttpPost]

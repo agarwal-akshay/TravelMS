@@ -231,6 +231,7 @@
     <Compile Include="BizLayers\LoginBizLayer.cs" />
     <Compile Include="BizLayers\ClaimRequestsBizLayer.cs" />
     <Compile Include="BizLayers\StatusDetail.cs" />
+    <Compile Include="BizLayers\AccoBizLayer.cs" />
     <Compile Include="BizLayers\TravelBizLayer.cs" />
     <Compile Include="BizLayers\User_IDCheckBizLayer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="DataAccessLayers\LoginDALayer.cs" />
     <Compile Include="DataAccessLayers\RegisterDALayer.cs" />
     <Compile Include="DataAccessLayers\ClaimRequestsDALayer.cs" />
+    <Compile Include="DataAccessLayers\AccoDALayer.cs" />
     <Compile Include="DataAccessLayers\TravelDALayer.cs" />
     <Compile Include="DataAccessLayers\User_IDCheckDALayer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -254,6 +256,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AgentModels.cs" />
+    <Compile Include="Models\AccoModel.cs" />
     <Compile Include="Models\ClaimRequestsModel.cs" />
     <Compile Include="Models\EmployeeModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -356,6 +359,9 @@
     <Content Include="Views\Employee\ViewClaimRequests.cshtml" />
     <Content Include="Views\AdminPanel\settle.cshtml" />
     <None Include="Service References\ServiceReference1\Service11.wsdl" />
+    <Content Include="Views\Employee\addAcco.cshtml" />
+    <Content Include="Views\AdminPanel\closedRequests.cshtml" />
+    <Content Include="Views\Employee\cancelRequest.cshtml" />
     <Content Include="Views\Agent\CancelBookedTickets.cshtml" />
     <Content Include="Views\Employee\ChangeTravelReqList.cshtml" />
     <Content Include="Views\Employee\ChangeTravelRequest.cshtml" />
