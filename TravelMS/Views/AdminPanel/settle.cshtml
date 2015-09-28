@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TravelMS.Models.ClaimRequestsModel>
+
+@{
+    ViewBag.Title = "Settle";
+}
+
+
+<h2>Settle Claims</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Request_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claim_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claim_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Settled_Amount),
+            @Html.DisplayNameFor(model => model.Admin_Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+    </tr>
+
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Travel_Request_ID)
+        </td>
+      <td>
+          @Html.DisplayFor(modelItem => item.Claim_Amount)
+      </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claim_Amount)
+      
+          </td>
+        <td>
+            @using (Html.BeginForm("SettleClaim","AdminPanel" ))
+            {
+                @Html.TextBoxFor(modelItem => item.Settled_Amount)
+
+                @Html.TextBoxFor(modelItem => item.Admin_Remarks)
+                
+                @Html.Hidden("Claim_ID", @item.Claim_ID)
+
+                <input type="submit" value="Settle Request" id="claimButton" />
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+    </tr>
+}
+
+</table>

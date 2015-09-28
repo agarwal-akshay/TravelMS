@@ -46,15 +46,22 @@ namespace TravelMS.Controllers
             return View();
         }
 
-        [ValidateAntiForgeryToken]
         public ActionResult settle()
         {
-            return View();
+            var modelList = ClaimRequestsBizLayer.SettleClaimRequests();
+            return View(modelList);
         }
 
         public ActionResult closedRequests()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SettleClaim()
+        {
+            ClaimRequestsBizLayer.SettleClaim(Request.Params["Claim_ID"], Int32.Parse(Request.Params["item.Settled_Amount"]), Request.Params["item.Admin_Remarks"]);
+            return RedirectToAction("settle", "AdminPanel");
         }
 
         public ActionResult addAgent()

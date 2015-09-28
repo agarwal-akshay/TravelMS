@@ -58,5 +58,33 @@ namespace TravelMS
             dr.Close();
             return rList;
         }
+
+        public static IEnumerable<ClaimRequestsModel> SettleClaimRequests()
+        {
+            var dr = ClaimRequestsDALayer.SettleClaimRequests();
+            var rList = new List<ClaimRequestsModel>();
+            while (dr.Read())
+            {
+                System.Diagnostics.Debug.WriteLine(rList);
+                rList.Add(new ClaimRequestsModel
+                {
+                    Claim_ID = (string)(dr[0]),
+                    Travel_Request_ID = dr.GetString(1),
+                    Claim_Amount = dr.GetInt32(2),
+                    Settled_Amount = dr.GetInt32(3),
+                    Remarks = dr.GetString(4),
+                    Admin_Remarks = dr.GetString(5),
+                    Claim_Status = dr.GetString(6),
+                    Admin_ID = dr.GetString(7)
+                });
+            }
+            dr.Close();
+            return rList;
+        }
+
+        public static void SettleClaim(string p,int a ,string b)
+        {
+            ClaimRequestsDALayer.SettleClaim(p,a,b);
+        }
     }
 }

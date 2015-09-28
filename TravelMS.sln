@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMS", "TravelMS\TravelMS.csproj", "{8C82D966-E16A-48FE-9867-8061FE7A2EFE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BAA28D02-E26D-4601-A36B-470E3E6BC555} = {BAA28D02-E26D-4601-A36B-470E3E6BC555}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMSWebService", "TravelMSWebService\TravelMSWebService.csproj", "{BAA28D02-E26D-4601-A36B-470E3E6BC555}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,12 +20,16 @@ Global
 		{8C82D966-E16A-48FE-9867-8061FE7A2EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C82D966-E16A-48FE-9867-8061FE7A2EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C82D966-E16A-48FE-9867-8061FE7A2EFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAA28D02-E26D-4601-A36B-470E3E6BC555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA28D02-E26D-4601-A36B-470E3E6BC555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA28D02-E26D-4601-A36B-470E3E6BC555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA28D02-E26D-4601-A36B-470E3E6BC555}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.SqlCe.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

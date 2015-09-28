@@ -12,7 +12,7 @@ namespace TravelMS
     {
         public static IDataReader User_IDCheckDAL(string requestedUser_ID)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand queryCmmnd = new SqlCommand("SELECT User_ID FROM EMPLOYEES WHERE User_ID=@User_ID");
             queryCmmnd.CommandType = CommandType.Text;

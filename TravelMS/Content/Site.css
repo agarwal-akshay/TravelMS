@@ -12,9 +12,8 @@ body {
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    margin: 0;
+    margin-bottom: 0;
     padding: 0;
-    height: 99%;
 }
 
 a {
@@ -105,8 +104,6 @@ h5, h6 {
     background-color: #efeeef;
     clear: both;
     padding-bottom: 35px;
-    min-height: 80%;
-    height: 1px;
 }
 
 .main-content {
@@ -128,8 +125,6 @@ footer {
     background-color: #e2e2e2;
     font-size: .8em;
     height: 100px;
-    position: absolute;
-    bottom: 0;
     width: 100%;
 }
 

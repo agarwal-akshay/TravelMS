@@ -6,7 +6,7 @@
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 <aside>
-    <h4>No. of requests applied so far: @Html.ActionLink(ViewBag.capacity, "ViewTravelRequests", "Employee")</h4>
+    <h4>No. of requests applied so far: <a href="/Employee/ViewTravelRequests">@ViewBag.capacity</a></h4>
 </aside>
 <ol class="round">
     <li class="one">
