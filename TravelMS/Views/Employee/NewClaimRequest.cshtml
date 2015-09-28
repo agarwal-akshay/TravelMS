@@ -22,11 +22,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Claim_Request_ID)
+            @Html.LabelFor(model => model.Claim_ID)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Claim_Request_ID)
-            @Html.ValidationMessageFor(model => model.Claim_Request_ID)
+            @Html.EditorFor(model => model.Claim_ID)
+            @Html.ValidationMessageFor(model => model.Claim_ID)
         </div>
 
         <div class="editor-label">
@@ -56,8 +56,8 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        document.getElementById("Claim_Request_ID").value = "@ViewBag.nextClaimID";
-        document.getElementById("Claim_Request_ID").readOnly = true;
-        document.getElementById("Claim_Request_ID").style.color = "gray";
+        document.getElementById("Claim_ID").value = "@ViewBag.nextClaimID";
+        document.getElementById("Claim_ID").readOnly = true;
+        document.getElementById("Claim_ID").style.color = "gray";
     })
 </script>

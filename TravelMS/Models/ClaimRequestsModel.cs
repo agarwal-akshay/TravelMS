@@ -20,7 +20,8 @@ namespace TravelMS.Models
         public string Claim_ID { get; set; }
 
         [Required]
-        [Range(0, int.MaxValue, ErrorMessage = "Claim Amount must be greater than zero.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Claim Amount out of limits.")]
+        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Claim Amount")]
         public int Claim_Amount { get; set; }
 

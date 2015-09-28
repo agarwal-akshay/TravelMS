@@ -551,13 +551,18 @@ table {
     border-spacing: 0;
     margin-top: 0.75em;
     border: 0 none;
+    width: 100%;
 }
 
 th {
     font-size: 1.2em;
     text-align: left;
-    border: none 0px;
-    padding-left: 0;
+    /*border: none 0px;*/
+    border: 1px solid #98bf21;
+    /*padding-left: 0;*/
+    padding: 3px 7px 2px 7px;
+    background-color: #A7C942;
+    color: #ffffff;
 }
 
     th a {
@@ -598,7 +603,9 @@ th {
 
 td {
     padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
+    /*border: 0 none;*/
+    padding: 3px 7px 2px 7px;
+    border: 1px solid #98bf21;
 }
 
 tr.pager td {
