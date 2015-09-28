@@ -356,6 +356,9 @@
     <Content Include="Views\Employee\ViewClaimRequests.cshtml" />
     <Content Include="Views\AdminPanel\settle.cshtml" />
     <None Include="Service References\ServiceReference1\Service11.wsdl" />
+    <Content Include="Views\Agent\CancelBookedTickets.cshtml" />
+    <Content Include="Views\Employee\ChangeTravelReqList.cshtml" />
+    <Content Include="Views\Employee\ChangeTravelRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

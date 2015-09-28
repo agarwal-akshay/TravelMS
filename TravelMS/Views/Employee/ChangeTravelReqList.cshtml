@@ -1,0 +1,113 @@
+﻿@model List<TravelMS.Models.NewTravelRequestModel>
+
+@{
+    ViewBag.Title = "ChangeTravelReqList";
+}
+
+<h2>List of your travel requests you can change</h2>
+<table>
+    <tr>
+        <th>Change Link</th>
+        <th>Travel Request ID</th>
+        <th>Employee ID</th>
+        <th>Trip Name</th>
+        <th>Travel Type (Purpose)</th>
+        <th>Travel Date</th>
+        <th>Mode of Travel</th>
+        <th>Travel Class</th>
+        <th>Source City</th>
+        <th>Destination City</th>
+        <th>Time (hh:mm)</th>
+        <th>Approver</th>
+        <th>Agent ID</th>
+        <th>Request Status</th>
+        <th>Accomodation Status</th>
+        <th>Remarks</th>
+    </tr>
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td>
+                @using (Html.BeginForm("ChangeTravelRequest","Employee"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Travel_Request_ID", @item.Travel_Request_ID)
+                    @Html.Hidden("Emp_ID", @item.Emp_ID)
+                    @Html.Hidden("Trip_Name", @item.Trip_Name)
+                    @Html.Hidden("Travel_Type_Purpose", @item.Travel_Type_Purpose)
+                    @Html.Hidden("Mode_of_Travel", @item.Mode_of_Travel)
+                    @Html.Hidden("Travel_Class", @item.Travel_Class)
+                    @Html.Hidden("Source", @item.Source_City)
+                    @Html.Hidden("Destination", @item.Destination_City)
+                    @Html.Hidden("Travel_Date", @item.Travel_Date)
+                    @Html.Hidden("Travel_Time_hh", @item.Travel_Time_hh)
+                    @Html.Hidden("Travel_Time_mm", @item.Travel_Time_mm)
+                    @Html.Hidden("First_Level_Approver", @item.First_Level_Approver)
+                    @Html.Hidden("Remarks", @item.Remarks)
+                                  
+                    <input type="submit" value="Change" id="bookButton" />
+                
+                }
+            </td>
+            <td>
+                @(item.Travel_Request_ID)
+            </td>
+            <td>
+                @(item.Emp_ID)
+            </td>
+            <td>
+                @(item.Trip_Name)
+            </td>
+
+            <td>
+                @(item.Travel_Type_Purpose)
+            </td>
+
+            <td>
+                @(item.Travel_Date)
+            </td>
+            <td>
+                @(item.Mode_of_Travel)
+            </td>
+
+            <td>
+                @(item.Travel_Class)
+            </td>
+
+            <td>
+                @(item.Source_City)
+            </td>
+
+            <td>
+                @(item.Destination_City)
+            </td>
+
+            <td>
+                @(item.Travel_Time_hh):@(item.Travel_Time_mm)
+            </td>
+
+            <td>
+                @(item.First_Level_Approver)
+            </td>
+
+            <td>
+                @(item.Agent_ID)
+            </td>
+
+            <td>
+                @(item.Request_Status)
+            </td>
+
+            <td>
+                @(item.Acco_Status)
+            </td>
+
+            <td>
+                @(item.Remarks)
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Back to Dash", "Index")
+</p>

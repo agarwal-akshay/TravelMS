@@ -18,6 +18,21 @@ namespace TravelMS.Controllers
             return View();
         }
 
+        public ActionResult CancelBookedTickets()
+        {
+            var modelList = TravelBizLayer.GetAgentBookedList();
+            return View(modelList);
+        }
+
+        [HttpPost]
+        public ActionResult CancelTicket()
+        {
+            TravelBizLayer.CancelTicket(Request.Params["Ticket_Booking_ID"]);
+
+            ViewBag.Message = "Ticket Booking Successful! <a href=\"/Agent\">Go to Home page</a>";
+            return View("Success");
+        }
+
         public ActionResult ViewBookingRequests()
         {
             var modelList = TravelBizLayer.GetAgentRequestList();
@@ -33,6 +48,8 @@ namespace TravelMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BookTicket(TicketBooking model)
         {
+            //if(String.IsNullOrWhiteSpace(model.Ticket_Booking_ID))
+            //model.Ticket_Booking_ID = Request.QueryString["Req_ID"];
             //ViewBag.Emp_ID = Emp_ID; //(ViewBag unused)
             //ViewBag.Mode_of_Travel = Mode_of_Travel;
             //ViewBag.Travel_Class = Travel_Class;

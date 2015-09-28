@@ -56,5 +56,20 @@ namespace TravelMS
             return TravelDALayer.AgentListDAL();
         }
 
+        public static List<Models.TicketBooking> GetAgentBookedList()
+        {
+            List<Models.TicketBooking> reqList = TravelDALayer.GetAgentBookedList();
+            return reqList;
+        }
+
+        public static void CancelTicket(string p)
+        {
+            TravelDALayer.CancelTicket(p);
+        }
+
+        public static void ChangeTravelReq(Models.NewTravelRequestModel data)
+        {
+            TravelDALayer.ChangeTravelReq(data);
+        }
     }
 }

@@ -61,6 +61,28 @@ namespace TravelMS.Controllers
             return View(modelList);            
         }
 
+        public ActionResult ChangeTravelReqList()
+        {
+            var modelList = TravelBizLayer.GetRequestList();
+            return View(modelList);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeTravelRequest()
+        {
+            ViewBag.AgentList = TravelBizLayer.AgentListBiz();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeTrReqInner(NewTravelRequestModel data)
+        {
+            TravelBizLayer.ChangeTravelReq(data);
+            ViewBag.Message = "Travel Request Successfully Changed";
+            return View("Success");
+        }
+        
+
         public ActionResult ViewApproveRejRequests()
         {
             var modelList = TravelBizLayer.GetApproveRejRequestList();

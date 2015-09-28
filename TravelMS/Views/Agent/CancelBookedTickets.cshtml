@@ -1,0 +1,42 @@
+﻿@model List<TravelMS.Models.TicketBooking>
+@using TravelMS.Models
+
+
+@{
+    ViewBag.Title = "Cancel Booked Tickets";
+}
+
+<h2>Cancel Booked Tickets</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Cancel Link</th>
+        <th>Travel Request ID</th>
+        <th>Ticket Booking ID</th>
+        <th>Ticket Details</th>
+        <th>Booking Status</th>
+    </tr>
+
+    @foreach (var item in @Model)
+    {
+        <tr>
+            @using (Html.BeginForm("CancelTicket", "Agent"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Ticket_Booking_ID", @item.Ticket_Booking_ID)
+                <td>
+                    <input type="submit" value="Cancel" id="cancelButton" />
+                </td>
+            }
+            <td>@(item.Travel_Request_ID)</td>
+            <td>@(item.Ticket_Booking_ID)</td>
+            <td>@(item.Ticket_Details)</td>
+            <td>@(item.Booking_Status)</td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Back to Dash", "Index")
+</p>
+
+

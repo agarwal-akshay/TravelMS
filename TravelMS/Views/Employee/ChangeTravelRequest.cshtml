@@ -1,0 +1,158 @@
+﻿@model TravelMS.Models.NewTravelRequestModel
+@{
+    ViewBag.Title = "New Travel Request";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create here.</h2>
+</hgroup>
+
+@using (Html.BeginForm("ChangeTrReqInner","Employee"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    var tripTypes = new List<SelectListItem>
+                {
+                      new SelectListItem { Text = "Business", Value = "Business" },
+                      new SelectListItem { Text = "Personal", Value = "Personal"}
+                };
+    var travelModes = new List<SelectListItem>
+                {
+                      new SelectListItem { Text = "Air", Value = "Air" },
+                      new SelectListItem { Text = "Rail", Value = "Rail"},
+                      new SelectListItem { Text = "Bus", Value = "Bus" }
+                };
+    var cities = new List<SelectListItem>
+                {
+                      new SelectListItem { Text = "Bangalore", Value = "Bangalore" },
+                      new SelectListItem { Text = "Mumbai", Value = "Mumbai"}
+                };
+    <fieldset>
+        <legend>Place a New Travel Request</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Emp_ID)
+                @Html.TextBoxFor(m => m.Emp_ID, new { @Value = @Request.Params["Emp_ID"] })
+                @Html.ValidationMessageFor(m => m.Emp_ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Travel_Request_ID)
+                @Html.TextBoxFor(m => m.Travel_Request_ID, new { @Value = @Request.Params["Travel_Request_ID"] })
+                @Html.ValidationMessageFor(m => m.Travel_Request_ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Trip_Name)
+                @Html.TextBoxFor(m => m.Trip_Name, new { @Value = @Request.Params["Trip_Name"] })
+                @Html.ValidationMessageFor(m => m.Trip_Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Travel_Type_Purpose)
+                @Html.DropDownListFor(m => m.Travel_Type_Purpose, new SelectList(tripTypes, "Value", "Text"))
+                @Html.ValidationMessageFor(m => m.Travel_Type_Purpose)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Travel_Date)
+                @Html.EditorFor(m => m.Travel_Date)
+                @Html.ValidationMessageFor(m => m.Travel_Date)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Mode_of_Travel)
+                @Html.DropDownListFor(m => m.Mode_of_Travel, new SelectList(travelModes, "Value", "Text"), new { onchange = "PopulateClassList();" })
+                @Html.ValidationMessageFor(m => m.Mode_of_Travel)
+            </li>
+
+            <li>
+                @Html.LabelFor(m => m.Travel_Class)
+                @Html.DropDownListFor(m => m.Travel_Class, new SelectList(new List<SelectListItem> { new SelectListItem { Text = "Class", Value = "Class" } }, "Value", "Text"))
+                @Html.ValidationMessageFor(m => m.Travel_Class)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Source_City)
+                @Html.DropDownListFor(m => m.Source_City, new SelectList(cities, "Value", "Text"))
+                @Html.ValidationMessageFor(m => m.Source_City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Destination_City)
+                @Html.DropDownListFor(m => m.Destination_City, new SelectList(cities, "Value", "Text"))
+                @Html.ValidationMessageFor(m => m.Destination_City)
+            </li>
+
+            <li>
+                @Html.Label("Travel Time [hh:mm]")
+                @Html.TextBoxFor(m => m.Travel_Time_hh, new { style = "width:50px" , @Value = @Request.Params["Travel_Time_hh"] })
+                :
+                @Html.TextBoxFor(m => m.Travel_Time_mm, new { style = "width:50px" ,@Value = @Request.Params["Travel_Time_mm"]})
+                @Html.ValidationMessageFor(m => m.Travel_Time_hh)
+                @Html.ValidationMessageFor(m => m.Travel_Time_mm)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.First_Level_Approver)
+                @Html.TextBoxFor(m => m.First_Level_Approver,new {@Value = @Request.Params["First_Level_Approver"]})@@comail.com
+                @Html.ValidationMessageFor(m => m.First_Level_Approver)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Agent_ID)
+                @Html.DropDownListFor(m => m.Agent_ID, (IEnumerable<SelectListItem>)ViewBag.AgentList)
+                @Html.ValidationMessageFor(m => m.Agent_ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Remarks)
+                @Html.TextBoxFor(m => m.Remarks, new { @Value = @Request.Params["Remarks"] })
+                @Html.ValidationMessageFor(m => m.Remarks)
+            </li>
+        </ol>
+        <input type="submit" value="Submit Changed Request" />
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to Dash", "Index")
+</div>
+<script type="text/javascript">
+    function MyOnLoad() {
+        PopulateClassList();
+        document.getElementById("Emp_ID").value = document.getElementById("UserEmp_ID").value;
+        document.getElementById("Emp_ID").contentEditable = false;
+        document.getElementById("Emp_ID").style.color = "gray";
+        document.getElementById("Travel_Request_ID").value = document.getElementById("NextReq_ID").value;
+        document.getElementById("Travel_Request_ID").contentEditable = false;
+        document.getElementById("Travel_Request_ID").style.color = "gray";
+    }
+
+    function PopulateClassList() {
+        mode = document.getElementById("Mode_of_Travel");
+        select = document.getElementById("Travel_Class");
+        select.innerHTML = "";
+        switch (mode.options[mode.selectedIndex].value) {
+            case "Air":
+                var list = ["Economy", "Business"];
+                for (var i = 0; i < list.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = list[i];
+                    opt.innerHTML = list[i];
+                    select.appendChild(opt);
+                }
+                break;
+            case "Rail":
+                var list = ["IAC", "IIAC", "IIIAC", "SL"];
+                for (var i = 0; i < list.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = list[i];
+                    opt.innerHTML = list[i];
+                    select.appendChild(opt);
+                }
+                break;
+            case "Bus":
+                var list = ["Sleeper", "Semi Sleeper", "NonAC"];
+                for (var i = 0; i < list.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = list[i];
+                    opt.innerHTML = list[i];
+                    select.appendChild(opt);
+                }
+                break;
+        }
+    }
+
+    document.onload = MyOnLoad();
+</script>

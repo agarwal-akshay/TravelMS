@@ -3,16 +3,13 @@
 @{
     ViewBag.Title = "BookTicket";
 }
-<script>
-    document.getElementById('Travel_Request_ID').value = "@Request.Params["Req_ID"]";
-</script>
 
 <h2>BookTicket</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary()
 
     <fieldset>
         <legend>TicketBooking</legend>
@@ -27,30 +24,31 @@
                 <th>Remarks</th>
             </tr>
             <tr>
-                <td>@Request.Params["Emp_ID"]</td>
-                <td>@Request.Params["Mode_of_Travel"]</td>
-                <td>@Request.Params["Travel_Class"]</td>
-                <td>@Request.Params["Travel_Date"]</td>
-                <td>@Request.Params["Travel_time_hh"] : @Request.Params["Travel_time_mm"]</td>
-                <td>@Request.Params["Remarks"]</td>
+                <td>@Request.QueryString["Emp_ID"]</td>
+                <td>@Request.QueryString["Mode_of_Travel"]</td>
+                <td>@Request.QueryString["Travel_Class"]</td>
+                <td>@Request.QueryString["Travel_Date"]</td>
+                <td>@Request.QueryString["Travel_time_hh"] : @Request.QueryString["Travel_time_mm"]</td>
+                <td>@Request.QueryString["Remarks"]</td>
             </tr>
         </table>
 
+
         @Html.LabelFor(model => model.Travel_Request_ID)
-        @Html.EditorFor(model => model.Travel_Request_ID)
+        @Html.TextBoxFor(model => model.Travel_Request_ID,new { @Value = @Request.QueryString["Req_ID"]})
         @Html.ValidationMessageFor(model => model.Travel_Request_ID)
 
         @Html.Label("Source_City", "Source City")
-        @Html.TextBox("Source_City_Box", @Request.Params["Source"])
+        @Html.TextBox("Source_City_Box", @Request.QueryString["Source"])
 
         @Html.Label("Destination_City", "Destination City")
-        @Html.TextBox("Destination_City_Box", @Request.Params["Destination"])
+        @Html.TextBox("Destination_City_Box", @Request.QueryString["Destination"])
 
         @Html.Label("Date", "Travel Date")
-        @Html.TextBox("Date_Box", DateTime.Parse(@Request.Params["Travel_Date"]).Date)
+        @Html.TextBox("Date_Box", DateTime.Parse(@Request.QueryString["Travel_Date"]).Date)
 
         @Html.Label("Time", "Time")
-        @Html.TextBox("Time_Box_hh", @Request.Params["Travel_Time_hh"], new { style = "width:30px" }) : @Html.TextBox("Time_Box_mm", @Request.Params["Travel_Time_mm"], new { style = "width:30px" })
+        @Html.TextBox("Time_Box_hh", @Request.QueryString["Travel_Time_hh"], new { style = "width:30px" }) : @Html.TextBox("Time_Box_mm", @Request.QueryString["Travel_Time_mm"], new { style = "width:30px" })
 
         @Html.LabelFor(model => model.Ticket_Details)
         @Html.EditorFor(model => model.Ticket_Details)
