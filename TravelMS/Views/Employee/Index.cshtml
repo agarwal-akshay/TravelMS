@@ -5,28 +5,28 @@
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
-
-@{
-    <ol class="round">
-        <li class="one">
-            <h5>Travel Request</h5>
-            @Html.ActionLink("New Travel Request", "NewTravelRequest", "Employee")
-            <br />
-            @Html.ActionLink("View Travel Request", "ViewTravelRequests", "Employee")
-            <br />
-            @Html.ActionLink("Change Request", "ChangeRequest", "Employee")
-            <br />
-            @Html.ActionLink("Cancel Request", "CancelRequest", "Employee")
-        </li>
-        <li class="two">
-            <h5>Claim Request</h5>
-            @Html.ActionLink("New Claim Request", "NewClaimRequest", "Employee")
-            <br />
-            @Html.ActionLink("View Claim Requests", "ViewClaimRequests", "Employee")
-        </li>
-        <li class="three">
-            <h5>Approve/Reject Requests</h5>
-            @Html.ActionLink("Approve/Reject Requests", "ViewApproveRejRequests", "Employee")
-        </li>
-    </ol>
-}
+<aside>
+    <h4>No. of requests applied so far: @Html.ActionLink(ViewBag.capacity, "ViewTravelRequests", "Employee")</h4>
+</aside>
+<ol class="round">
+    <li class="one">
+        <h5>Travel Request</h5>
+        @Html.ActionLink("New Travel Request", "NewTravelRequest", "Employee")
+        <br />
+        @Html.ActionLink("View Travel Request", "ViewTravelRequests", "Employee")
+        <br />
+        @Html.ActionLink("Change Request", "ChangeRequest", "Employee")
+        <br />
+        @Html.ActionLink("Cancel Request", "CancelRequest", "Employee")
+    </li>
+    <li class="two">
+        <h5>Claim Request</h5>
+        @Html.ActionLink("New Claim Request", "NewClaimRequest", "Employee")
+        <br />
+        @Html.ActionLink("View Claim Requests", "ViewClaimRequests", "Employee")
+    </li>
+    <li class="three">
+        <h5>Approve/Reject Requests</h5>
+        @Html.ActionLink("Approve/Reject Requests", "ViewApproveRejRequests", "Employee")
+    </li>
+</ol>
