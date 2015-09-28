@@ -1,0 +1,84 @@
+﻿@model TravelMS.Models.AccoModel
+
+@{
+    ViewBag.Title = "Add Accommodation Details";
+}
+
+<h2>Add Accommodation Details</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+        var roomTypes = new List<SelectListItem>
+        {
+              new SelectListItem { Text = "Single", Value = "Single" },
+              new SelectListItem { Text = "Shared", Value = "Shared"},
+              new SelectListItem { Text = "Guesthouse", Value = "Guesthouse"}
+        };
+
+    <fieldset>
+        <legend>AccoModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Travel_Request_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Travel_Request_ID)
+            @Html.ValidationMessageFor(model => model.Travel_Request_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Check_in_Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Check_in_Date)
+            @Html.ValidationMessageFor(model => model.Check_in_Date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Check_out_Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Check_out_Date)
+            @Html.ValidationMessageFor(model => model.Check_out_Date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Room_Type)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Room_Type,new SelectList(roomTypes,"Value","Text"))
+            @Html.ValidationMessageFor(model => model.Room_Type)
+        </div>
+
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Dash", "Index")
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        document.getElementById("Travel_Request_ID").value = "@ViewBag.lastRequest[0]";
+        document.getElementById("Travel_Request_ID").readOnly = true;
+        document.getElementById("Travel_Request_ID").style.color = "gray";
+        document.getElementById("City").value = "@ViewBag.lastRequest[1]";
+        document.getElementById("City").readOnly = true;
+        document.getElementById("City").style.color = "gray";
+    })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

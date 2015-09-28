@@ -16,7 +16,7 @@ namespace TravelMS.Controllers
         public ActionResult Index()
         {
             var modelList = TravelBizLayer.GetRequestList();
-            ViewBag.capacity = modelList.Capacity.ToString();
+            ViewBag.capacity = modelList.Count.ToString();
             return View();
         }
 
@@ -42,7 +42,7 @@ namespace TravelMS.Controllers
                     if (!TravelBizLayer.TravelReqBiz(model))
                         return View("Error");
 
-                    ViewBag.Message = "Travel Request Registered! <a href=\"/Employee\">Go to Home page</a>";
+                    ViewBag.Message = "<h3>Travel Request Registered!</h3><br/><a href='Employee/addAcco'>Add accommodation details.</a>  <a href='Employee'>Go to Dashboard</a>";
                     return View("Success");
                 }
                 catch (MembershipCreateUserException e)
@@ -59,6 +59,21 @@ namespace TravelMS.Controllers
         {
             var modelList = TravelBizLayer.GetRequestList();
             return View(modelList);            
+        }
+
+        public ActionResult addAcco()
+        {
+            ViewBag.lastRequest = AccoBizLayer.getLastRequest();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult addAcco(AccoModel model)
+        {
+            var res = AccoBizLayer.addAccoDetails(model);
+            ViewBag.Message = "Accommodation Added. <a href=\"/Employee\">Go to Dashboard.</a>";
+            return View("Success");
         }
 
         public ActionResult ViewApproveRejRequests()
