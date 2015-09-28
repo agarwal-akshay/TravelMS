@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TravelMS.Models.NewTravelRequestModel>
+
+@{
+    ViewBag.Title = "Cancel Request";
+}
+
+<h2>Cancel Request</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Request_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trip_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source_City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destination_City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Request_Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Travel_Request_ID", item.Travel_Request_ID)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Travel_Request_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trip_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Travel_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Source_City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Destination_City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Request_Status)
+                </td>
+                <td>
+                    <input type="submit" value="Cancel Request" />
+                </td>
+            </tr>
+        }
+    }
+
+</table>

@@ -42,47 +42,15 @@ namespace TravelMS
             return false;
         }
 
-        public static List<NewTravelRequestModel> GetRequestList()
+        public static IDataReader GetRequestList()
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
-            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @CurUser_ID)");
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Travel_Request_ID],[Emp_ID],[Trip_Name],[Travel_Type_Purpose],[Travel_Date],[Mode_of_Travel],[Travel_Class],[Source_City],[Destination_City],[Travel_Time_hh],[Travel_Time_mm],[First_Level_Approver],[Agent_ID],[Request_Status],[Acco_Status],[Remarks] FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @CurUser_ID) AND Request_Status != 'C'");
 
             reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
 
-            IDataReader nReader = travelMSysDB.ExecuteReader(reqListCmmnd);
-
-            var rList = new List<Models.NewTravelRequestModel>();
-
-            /*Object[] values = new Object[16];
-            nReader.GetValues(values);*/
-
-            while (nReader.Read())
-            {
-                //rList.Add(nReader.Get );
-                rList.Add(new Models.NewTravelRequestModel
-                {
-                    Travel_Request_ID = (string)nReader[0],
-                    Emp_ID = Int32.Parse((string)nReader[1]),
-                    Trip_Name = (string)nReader[2],
-                    Travel_Type_Purpose = (string)nReader[3],
-                    Travel_Date=(DateTime)nReader[4],
-                    Mode_of_Travel=(string)nReader[5],
-                    Travel_Class=(string)nReader[6],
-                    Source_City=(string)nReader[7],
-                    Destination_City=(string)nReader[8],
-                    Travel_Time_hh=(int)nReader[9],
-                    Travel_Time_mm=(int)nReader[10],
-                    First_Level_Approver=(string)nReader[11],
-                    Agent_ID=(string)nReader[12],
-                    Request_Status=StatusDetail.TravelRequestStatus( (string)nReader[13]),
-                    Acco_Status=StatusDetail.AccoStatus((string)nReader[14]),
-                    Remarks=(string)nReader[15]
-                });
-            }
-
-            nReader.Close();
-            return rList;
+            return travelMSysDB.ExecuteReader(reqListCmmnd);
         }
 
         public static List<NewTravelRequestModel> GetAgentRequestList()
@@ -95,7 +63,7 @@ namespace TravelMS
 
             IDataReader nReader = travelMSysDB.ExecuteReader(reqListCmmnd);
 
-            List<Models.NewTravelRequestModel> rList = new List<Models.NewTravelRequestModel>();
+            List<Models.NewTravelRequestModel> rList = new List<NewTravelRequestModel>();
 
             /*Object[] values = new Object[16];
             nReader.GetValues(values);*/
@@ -103,7 +71,7 @@ namespace TravelMS
             while (nReader.Read())
             {
                 //rList.Add(nReader.Get );
-                rList.Add(new Models.NewTravelRequestModel
+                rList.Add(new NewTravelRequestModel
                 {
                     Travel_Request_ID = (string)nReader[0],
                     Emp_ID = Int32.Parse((string)nReader[1]),
@@ -128,6 +96,20 @@ namespace TravelMS
             return rList;
         }
 
+        public static bool cancelRequest(string travelRequestID)
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
+
+            SqlCommand updateCmmnd = new SqlCommand("Update TRAVEL_REQUESTS Set Request_Status = 'C' WHERE Travel_Request_ID = @Travel_Request_ID ");
+            updateCmmnd.CommandType = CommandType.Text;
+
+            updateCmmnd.Parameters.AddWithValue("@Travel_Request_ID", travelRequestID);
+            int rowsAffected = travelMSysDB.ExecuteNonQuery(updateCmmnd);
+            Console.Write("rowsAffected " + rowsAffected);
+            if (rowsAffected == 1)
+                return true;
+            return false;
+        }
 
         public static List<NewTravelRequestModel> GetApproveRejRequestList()
         {
@@ -139,7 +121,7 @@ namespace TravelMS
 
             IDataReader nReader = travelMSysDB.ExecuteReader(reqListCmmnd);
 
-            List<Models.NewTravelRequestModel> rList = new List<Models.NewTravelRequestModel>();
+            var rList = new List<NewTravelRequestModel>();
 
             /*Object[] values = new Object[16];
             nReader.GetValues(values);*/

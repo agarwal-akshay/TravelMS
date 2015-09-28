@@ -34,7 +34,7 @@ namespace TravelMS
         public static IDataReader populateTravelRequests(string currUserID)
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
-            SqlCommand queryCmmnd = new SqlCommand("SELECT Travel_Request_ID FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @User_ID)");
+            SqlCommand queryCmmnd = new SqlCommand("SELECT Travel_Request_ID FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @User_ID) AND Request_Status != 'C'");
 
             queryCmmnd.CommandType = CommandType.Text;
             queryCmmnd.Parameters.AddWithValue("@User_ID", currUserID);
@@ -72,6 +72,18 @@ namespace TravelMS
             return travelMSysDB.ExecuteReader(reqListCmmnd);
         }
 
+        public static IDataReader ViewClosedRequests()
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
+
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Claim_ID],[Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks],[Admin_Remarks],[Claim_Status],[Admin_ID] FROM CLAIM_REQUESTS WHERE Admin_ID = @CurUser_ID AND Claim_Status = 'Y'");
+
+            reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
+
+            return travelMSysDB.ExecuteReader(reqListCmmnd);
+        }
+
+        
         public static IDataReader SettleClaimRequests()
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);

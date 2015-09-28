@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<TravelMS.Models.ClaimRequestsModel>
 
 @{
-    ViewBag.Title = "Settle";
+    ViewBag.Title = "Closed Requests";
 }
 
-
-<h2>Settle Claims</h2>
+<h2>My Closed Requests</h2>
 
 <table>
     <tr>
@@ -19,38 +18,44 @@
             @Html.DisplayNameFor(model => model.Claim_Amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Settled_Amount),
+            @Html.DisplayNameFor(model => model.Settled_Amount)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Admin_Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claim_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin_ID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Remarks)
         </th>
     </tr>
 
-
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Travel_Request_ID)
         </td>
-      <td>
-          @Html.DisplayFor(modelItem => item.Claim_Amount)
-      </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claim_ID)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Claim_Amount)
-      
-          </td>
+        </td>
         <td>
-            @using (Html.BeginForm("SettleClaim","AdminPanel" ))
-            {
-                @Html.TextBoxFor(modelItem => item.Settled_Amount)
-
-                @Html.TextBoxFor(modelItem => item.Admin_Remarks)
-                
-                @Html.Hidden("Claim_ID", @item.Claim_ID)
-
-                <input type="submit" value="Settle Request" id="claimButton" />
-            }
+            @Html.DisplayFor(modelItem => item.Settled_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin_Remarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Claim_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin_ID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Remarks)

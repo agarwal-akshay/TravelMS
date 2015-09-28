@@ -76,6 +76,22 @@ namespace TravelMS.Controllers
             return View("Success");
         }
 
+        public ActionResult cancelRequest()
+        {
+            var modelList = TravelBizLayer.GetRequestList();
+            return View(modelList);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult cancelRequest(List<NewTravelRequestModel> modelList, string Travel_Request_ID)
+        {
+            var res = TravelBizLayer.cancelRequest(Travel_Request_ID);
+            ModelState.Clear();
+            var updatedmodelList = TravelBizLayer.GetRequestList();
+            return View(updatedmodelList);
+        }
+
         public ActionResult ViewApproveRejRequests()
         {
             var modelList = TravelBizLayer.GetApproveRejRequestList();
