@@ -42,7 +42,7 @@
     @foreach (var item in @Model)
     {
         <tr>
-            @using (Html.BeginForm("BookTicket","Agent"))
+            @using (Html.BeginForm("BookTicket","Agent",FormMethod.Get))
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("Emp_ID", @item.Emp_ID)
@@ -55,8 +55,14 @@
                 @Html.Hidden("Source",@item.Source_City)
                 @Html.Hidden("Destination",@item.Destination_City)
                 @Html.Hidden("Req_ID",@item.Travel_Request_ID)
+                  
+                
                 <td>
+                    @*better to include the above hidden fields also in if lest user side script edit is done*@
+                    @if (!(item.Request_Status[0].Equals('P') || item.Request_Status[0].Equals('C')))
+                    {
                     <input type="submit" value="Book" id="bookButton" />
+                    }
                 </td>
             }
             <td>

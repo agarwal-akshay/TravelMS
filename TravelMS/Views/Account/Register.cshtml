@@ -75,7 +75,7 @@
                 @Html.LabelFor(m => m.User_ID)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(m => m.User_ID, new { @onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
+                @Html.EditorFor(m => m.User_ID, new { onkeypress = "document.getElementById(\"RegisterButton\").disabled = true;document.getElementById('User_ID').style.backgroundColor='';" })
                 @Html.ValidationMessageFor(m => m.User_ID)
                 <input id="Button1" type="button" value="Check Availablity" onclick="checkAvailUser_ID()" />
             </div>

@@ -63,8 +63,12 @@
                     @Html.Hidden("Source", @item.Source_City)
                     @Html.Hidden("Destination", @item.Destination_City)
                     @Html.Hidden("Req_ID", @item.Travel_Request_ID)
+                    
+                    if (!(item.Request_Status[0].Equals('P') || item.Request_Status[0].Equals('C')))
+                    {
                     <input type="submit" value="Reject" id="rejectButton" data-form-action="/Employee/RejRequests" />
-                    <input type="submit" value="Approve" id="approveButton" data-form-action="/Employee/ApproveRequests" />                
+                    <input type="submit" value="Approve" id="approveButton" data-form-action="/Employee/ApproveRequests" />         
+                    }       
                 }</td>
             <td>
                 @(item.Travel_Request_ID)
@@ -110,7 +114,7 @@
             <td>
                 @(item.Agent_ID)
             </td>
-
+            
             <td>
                 @(item.Request_Status)
             </td>

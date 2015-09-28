@@ -12,7 +12,7 @@ namespace TravelMS
     {
         public static bool LoginUserDAL(Models.LoginModel userData)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);// (@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
             SqlCommand selectCmmnd = new SqlCommand("SELECT [Password] FROM EMPLOYEES WHERE [User_ID]=@User_ID");
             selectCmmnd.CommandType = CommandType.Text;
@@ -29,7 +29,7 @@ namespace TravelMS
 
         internal static bool LoginAdminDAL(Models.LoginModel userData)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand selectCmmnd = new SqlCommand("SELECT [Password] FROM ADMINS WHERE [Admin_ID]=@User_ID");
             selectCmmnd.CommandType = CommandType.Text;
@@ -46,7 +46,7 @@ namespace TravelMS
 
         internal static bool LoginAgentDAL(Models.LoginModel userData)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand selectCmmnd = new SqlCommand("SELECT [Password] FROM AGENTS WHERE [Agent_ID]=@User_ID");
             selectCmmnd.CommandType = CommandType.Text;

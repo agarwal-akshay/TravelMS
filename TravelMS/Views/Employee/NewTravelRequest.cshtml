@@ -20,11 +20,10 @@
         
         function MyOnLoad() {
             PopulateClassList();
-            document.getElementById("Emp_ID").value = document.getElementById("UserEmp_ID").value;
-            document.getElementById("Emp_ID").contentEditable = false;
+            document.getElementById("Emp_ID").value = document.getElementById("UserEmp_ID").value
             document.getElementById("Emp_ID").style.color = "gray";
             document.getElementById("Travel_Request_ID").value = document.getElementById("NextReq_ID").value;
-            document.getElementById("Travel_Request_ID").contentEditable = false;
+            document.getElementById("Travel_Request_ID").readOnly = "true";
             document.getElementById("Travel_Request_ID").style.color = "gray";
         }
 
@@ -79,7 +78,7 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.Emp_ID)
-                @Html.TextBoxFor(m => m.Emp_ID)
+                @Html.TextBoxFor(m => m.Emp_ID, new { readOnly="true"})
             </li>
             <li>
                 @Html.LabelFor(m => m.Travel_Request_ID)

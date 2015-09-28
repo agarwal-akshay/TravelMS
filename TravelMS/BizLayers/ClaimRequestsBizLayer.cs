@@ -33,6 +33,7 @@ namespace TravelMS
                 Value = dr.GetString(dr.GetOrdinal("Travel_Request_ID"))
                 });
             }
+            dr.Close();
             return lstObj;
         }
     }

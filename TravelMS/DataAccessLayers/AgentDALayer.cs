@@ -12,7 +12,7 @@ namespace TravelMS
     {
         public static bool BookTicketDAL(Models.TicketBooking data)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand insertCmmnd = new SqlCommand("INSERT INTO TICKET_BOOKINGS ([Travel_Request_ID],[Ticket_Details],[Booking_Status]) VALUES (@Travel_Request_ID,@Ticket_Details,@Booking_Status)");
             insertCmmnd.CommandType = CommandType.Text;

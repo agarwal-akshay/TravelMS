@@ -19,6 +19,7 @@ namespace TravelMS
             {
                 lstObj.Add(FillDataRecord(dr));
             }
+            dr.Close();
             return lstObj;
         }
 

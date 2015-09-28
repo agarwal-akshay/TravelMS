@@ -14,7 +14,7 @@ namespace TravelMS
         {
             if (string.IsNullOrWhiteSpace(appr))
                 return false;
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand queryCmmnd = new SqlCommand("SELECT Job_Level FROM EMPLOYEES WHERE User_ID=@User_ID");
             queryCmmnd.CommandType = CommandType.Text;

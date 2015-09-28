@@ -14,7 +14,7 @@ namespace TravelMS
     {
         public static bool NewClaimRequest(ClaimRequestsModel claimData)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_ID],[Claim_Amount],[Emp_Remarks]) VALUES (@Travel_Request_ID,@Claim_Request_ID,@Claim_Amount,@Remarks)");
             insertCmmnd.CommandType = CommandType.Text;
@@ -33,7 +33,7 @@ namespace TravelMS
 
         public static IDataReader populateTravelRequests(string currUserID)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
             SqlCommand queryCmmnd = new SqlCommand("SELECT Travel_Request_ID FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @User_ID)");
 
             queryCmmnd.CommandType = CommandType.Text;

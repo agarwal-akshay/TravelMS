@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMS", "TravelMS\TravelMS.csproj", "{8C82D966-E16A-48FE-9867-8061FE7A2EFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMSWebService", "TravelMSWebService\TravelMSWebService.csproj", "{8DBBAF03-05B2-4688-9B06-04DBA33E9C8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceRunner", "ServiceRunner\ServiceRunner.csproj", "{A2498E74-97B3-4CF8-8E75-82FED8F83410}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,12 +17,20 @@ Global
 		{8C82D966-E16A-48FE-9867-8061FE7A2EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C82D966-E16A-48FE-9867-8061FE7A2EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C82D966-E16A-48FE-9867-8061FE7A2EFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBBAF03-05B2-4688-9B06-04DBA33E9C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBBAF03-05B2-4688-9B06-04DBA33E9C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBBAF03-05B2-4688-9B06-04DBA33E9C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBBAF03-05B2-4688-9B06-04DBA33E9C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2498E74-97B3-4CF8-8E75-82FED8F83410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2498E74-97B3-4CF8-8E75-82FED8F83410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2498E74-97B3-4CF8-8E75-82FED8F83410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2498E74-97B3-4CF8-8E75-82FED8F83410}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.SqlCe.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

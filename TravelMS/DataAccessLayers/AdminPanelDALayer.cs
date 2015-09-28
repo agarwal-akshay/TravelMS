@@ -13,7 +13,7 @@ namespace TravelMS
     {
         public static IDataReader lockedAccounts()
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand queryCmmnd = new SqlCommand("SELECT * FROM EMPLOYEES WHERE Access_Status = 'F'");
             queryCmmnd.CommandType = CommandType.Text;
@@ -23,7 +23,7 @@ namespace TravelMS
 
         public static bool unlockAccount(string requestedUser_ID)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand insertCmmnd = new SqlCommand("Update EMPLOYEES Set Access_Status = 'T' WHERE User_ID = @User_ID ");
             insertCmmnd.CommandType = CommandType.Text;
@@ -38,7 +38,7 @@ namespace TravelMS
 
         public static bool addAgent(AgentModel model)
         {
-            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+            SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
             SqlCommand insertCmmnd = new SqlCommand("INSERT INTO AGENTS(Agent_ID,Password,Agent_Name,Creator_Admin_ID,Phone_Num,Address) VALUES (@Agent_ID,@Password,@Agent_Name,@Creator_Admin_ID,@Phone_Num,@Address)");
             insertCmmnd.CommandType = CommandType.Text;
