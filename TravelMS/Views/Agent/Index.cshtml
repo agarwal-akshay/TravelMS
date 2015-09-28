@@ -4,26 +4,19 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    @*<h2>@User.Identity.Name</h2>*@
 </hgroup>
 
-@{
-    <ol class="round">
-        <li class="one">
-            <h5>Book Ticket</h5>
-            @Html.ActionLink("View Booking Requests", "ViewBookingRequests", "Agent")
-        </li>
-        <li class="two">
-            <h5>Cancel Booking</h5>
-            @Html.ActionLink("View Booked Tickets", "CancelBooking", "Agent")
-        </li>
-        <li class="three">
-            <h5>Delegate Booking</h5>
-            @Html.ActionLink("Go", "DelegateBooking", "Agent")
-        </li>
-    </ol>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<ol>
+    <li>
+        <h5>Book Ticket</h5>
+        @Html.ActionLink("View Booking Requests", "ViewBookingRequests", "Agent")
+    </li>
+    <li>
+        <h5>Cancel Booking</h5>
+        @Html.ActionLink("View Booked Tickets", "CancelBooking", "Agent")
+    </li>
+    <li>
+        <h5>Delegate Booking</h5>
+        @Html.ActionLink("Go", "DelegateBooking", "Agent")
+    </li>
+</ol>

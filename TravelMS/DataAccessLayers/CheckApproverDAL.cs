@@ -21,7 +21,7 @@ namespace TravelMS
 
             queryCmmnd.Parameters.AddWithValue("@User_ID", appr);
 
-            object level = travelMSysDB.ExecuteScalar(queryCmmnd);
+            var level = travelMSysDB.ExecuteScalar(queryCmmnd);
             if (level == null)
                 return false;
 

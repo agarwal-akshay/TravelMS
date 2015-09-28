@@ -14,7 +14,7 @@ namespace TravelMS
         public static List<RegisterModel> lockedAccounts()
         {
             List<RegisterModel> lstObj = new List<RegisterModel>();
-            IDataReader dr = AdminPanelDALayer.lockedAccounts();
+            var dr = AdminPanelDALayer.lockedAccounts();
             while (dr.Read())
             {
                 lstObj.Add(FillDataRecord(dr));
@@ -30,7 +30,7 @@ namespace TravelMS
 
         private static RegisterModel FillDataRecord(IDataReader dr)
         {
-            RegisterModel rm = new RegisterModel();
+            var rm = new RegisterModel();
 
             rm.Emp_ID = Int32.Parse(dr.GetString(dr.GetOrdinal("Emp_ID")));
             rm.Emp_Name = dr.GetString(dr.GetOrdinal("Emp_Name"));

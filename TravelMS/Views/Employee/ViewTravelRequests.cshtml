@@ -4,20 +4,8 @@
     ViewBag.Title = "List of your travel requests";
 }
 
-<style>
-    table, td, th {
-     border: 1px solid green;
-     /*border-collapse:collapse;*/
- }
-
-th {
-     background-color: darkgreen;
-     color: white;
- }
-</style>
-
 <h2>ViewTravelRequests</h2>
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>Travel Request ID</th>
             <th>Employee ID</th>
@@ -98,6 +86,5 @@ th {
         }
     </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=(model[0]).PrimaryKey */ }) |
     @Html.ActionLink("Back to Dash", "Index")
 </p>

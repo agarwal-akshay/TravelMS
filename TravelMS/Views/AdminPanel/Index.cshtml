@@ -4,30 +4,23 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    @*<h2>@User.Identity.Name</h2>*@
 </hgroup>
 
-@{
-    <ol class="round">
-        <li class="one">
-            <h5>Employee Details</h5>
-            @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel")
-            <br/>
-            @Html.ActionLink("Reset Password", "reset", "AdminPanel")
-            <br />
-            @Html.ActionLink("Settle Claims", "settle", "AdminPanel")
-            <br />
-            @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel")
-        </li>
-        <li class="two">
-            <h5>Agent Details</h5>
-            @Html.ActionLink("Add New Agent", "addAgent", "AdminPanel")
-            <br />
-            @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel")
-        </li>
-    </ol>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<ol class="round">
+    <li class="one">
+        <h5>Employee Details</h5>
+        @Html.ActionLink("View Locked Accounts", "lockedAccounts", "AdminPanel")
+        <br />
+        @Html.ActionLink("Reset Password", "reset", "AdminPanel")
+        <br />
+        @Html.ActionLink("Settle Claims", "settle", "AdminPanel")
+        <br />
+        @Html.ActionLink("View Closed Requests", "closedRequests", "AdminPanel")
+    </li>
+    <li class="two">
+        <h5>Agent Details</h5>
+        @Html.ActionLink("Add New Agent", "addAgent", "AdminPanel")
+        <br />
+        @Html.ActionLink("Block/Unblock Agent", "manageAgent", "AdminPanel")
+    </li>
+</ol>

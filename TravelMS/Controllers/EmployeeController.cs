@@ -55,14 +55,14 @@ namespace TravelMS.Controllers
 
         public ActionResult ViewTravelRequests()
         {
-            List<NewTravelRequestModel> model = TravelBizLayer.GetRequestList();
-            return View(model);            
+            var modelList = TravelBizLayer.GetRequestList();
+            return View(modelList);            
         }
 
         public ActionResult ViewApproveRejRequests()
         {
-            List<NewTravelRequestModel> model = TravelBizLayer.GetApproveRejRequestList();
-            return View(model);
+            var modelList = TravelBizLayer.GetApproveRejRequestList();
+            return View(modelList);
         }
 
         [HttpPost]
@@ -84,6 +84,7 @@ namespace TravelMS.Controllers
         public ActionResult NewClaimRequest()
         {
             var travelRequests = ClaimRequestsBizLayer.populateTravelRequests(User.Identity.Name);
+            ViewBag.nextClaimID = ClaimRequestsBizLayer.nextClaimID();
             ViewBag.travelRequests = travelRequests;
             return View();
         }
@@ -108,6 +109,12 @@ namespace TravelMS.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        public ActionResult ViewClaimRequests()
+        {
+            var model = ClaimRequestsBizLayer.ViewClaimRequests();
             return View(model);
         }
 

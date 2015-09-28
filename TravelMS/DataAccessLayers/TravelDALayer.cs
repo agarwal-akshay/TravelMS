@@ -6,13 +6,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TravelMS.Models;
 using WebMatrix.WebData;
 
 namespace TravelMS
 {
     public class TravelDALayer
     {
-        public static bool TravelReqDAL(Models.NewTravelRequestModel userData)
+        public static bool TravelReqDAL(NewTravelRequestModel userData)
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
@@ -41,7 +42,7 @@ namespace TravelMS
             return false;
         }
 
-        public static List<Models.NewTravelRequestModel> GetRequestList()
+        public static List<NewTravelRequestModel> GetRequestList()
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
@@ -51,7 +52,7 @@ namespace TravelMS
 
             IDataReader nReader = travelMSysDB.ExecuteReader(reqListCmmnd);
 
-            List<Models.NewTravelRequestModel> rList = new List<Models.NewTravelRequestModel>();
+            var rList = new List<Models.NewTravelRequestModel>();
 
             /*Object[] values = new Object[16];
             nReader.GetValues(values);*/
@@ -84,7 +85,7 @@ namespace TravelMS
             return rList;
         }
 
-        public static List<Models.NewTravelRequestModel> GetAgentRequestList()
+        public static List<NewTravelRequestModel> GetAgentRequestList()
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
@@ -128,7 +129,7 @@ namespace TravelMS
         }
 
 
-        public static List<Models.NewTravelRequestModel> GetApproveRejRequestList()
+        public static List<NewTravelRequestModel> GetApproveRejRequestList()
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 

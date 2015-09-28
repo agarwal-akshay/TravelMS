@@ -5,12 +5,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using TravelMS.Models;
 
 namespace TravelMS
 {
     public class LoginDALayer
     {
-        public static bool LoginUserDAL(Models.LoginModel userData)
+        public static bool LoginUserDAL(LoginModel userData)
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);// (@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
 
@@ -27,7 +28,7 @@ namespace TravelMS
             return false;
         }
 
-        internal static bool LoginAdminDAL(Models.LoginModel userData)
+        public static bool LoginAdminDAL(LoginModel userData)
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
@@ -44,7 +45,7 @@ namespace TravelMS
             return false;
         }
 
-        internal static bool LoginAgentDAL(Models.LoginModel userData)
+        public static bool LoginAgentDAL(LoginModel userData)
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 

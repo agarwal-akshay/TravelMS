@@ -62,12 +62,13 @@ namespace TravelMS.Models
 
         [Required]
         [Range(0, 23)]
+        [Display(Name = "Hours")]
         public int Travel_Time_hh { get; set; }
 
         [Required]
         [Range(0, 59)]
+        [Display(Name = "Minutes")]
         public int Travel_Time_mm { get; set; }
-
 
         [Required]
         [StringLength(50, ErrorMessage = "First Level Approver", MinimumLength = 1)]
@@ -86,7 +87,6 @@ namespace TravelMS.Models
         public string Request_Status { get; set; }
 
         public string Acco_Status { get; set; }
-
 
         [Required]
         [StringLength(50, ErrorMessage = "Remarks", MinimumLength = 1)]

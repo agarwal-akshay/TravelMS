@@ -16,12 +16,12 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
-            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_ID],[Claim_Amount],[Emp_Remarks]) VALUES (@Travel_Request_ID,@Claim_Request_ID,@Claim_Amount,@Remarks)");
+            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks]) VALUES (@Travel_Request_ID,@Claim_Amount,@Settled_Amount,@Remarks)");
             insertCmmnd.CommandType = CommandType.Text;
 
             insertCmmnd.Parameters.AddWithValue("@Travel_Request_ID", claimData.Travel_Request_ID);
-            insertCmmnd.Parameters.AddWithValue("@Claim_Request_ID", claimData.Claim_Request_ID);
             insertCmmnd.Parameters.AddWithValue("@Claim_Amount", claimData.Claim_Amount);
+            insertCmmnd.Parameters.AddWithValue("@Settled_Amount", 0);
             insertCmmnd.Parameters.AddWithValue("@Remarks", claimData.Remarks);
 
             int rowsAffected = travelMSysDB.ExecuteNonQuery(insertCmmnd);
@@ -40,6 +40,36 @@ namespace TravelMS
             queryCmmnd.Parameters.AddWithValue("@User_ID", currUserID);
 
             return travelMSysDB.ExecuteReader(queryCmmnd);
+        }
+
+        public static string nextClaimID()
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand selectCmmnd = new SqlCommand("SELECT IDENT_CURRENT('CLAIM_REQUESTS')+1");
+            selectCmmnd.CommandType = CommandType.Text;
+
+            object num = travelMSysDB.ExecuteScalar(selectCmmnd);
+
+            string res;
+            if (!(num == null))
+            {
+                res = ("000000" + num.ToString());
+                res = 'C' + res.Substring(res.Length - 6);
+                return res;
+            }
+            throw new Exception("Next Claim Request Failed.");
+        }
+
+        public static IDataReader ViewClaimRequests()
+        {
+            SqlDatabase travelMSysDB = new SqlDatabase(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TravelMS_Sep16.mdf;Integrated Security=True");
+
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Claim_ID],[Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks],[Admin_Remarks],[Claim_Status],[Admin_ID] FROM CLAIM_REQUESTS WHERE Travel_Request_ID IN (SELECT Travel_Request_ID FROM TRAVEL_REQUESTS WHERE Emp_ID = (SELECT Emp_ID FROM EMPLOYEES WHERE User_ID = @CurUser_ID))");
+
+            reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
+
+            return travelMSysDB.ExecuteReader(reqListCmmnd);
         }
     }
 }

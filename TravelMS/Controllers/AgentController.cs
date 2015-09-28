@@ -20,8 +20,8 @@ namespace TravelMS.Controllers
 
         public ActionResult ViewBookingRequests()
         {
-            List<NewTravelRequestModel> model = TravelBizLayer.GetAgentRequestList();
-            return View(model);
+            var modelList = TravelBizLayer.GetAgentRequestList();
+            return View(modelList);
         }
 
         public ActionResult BookTicket()

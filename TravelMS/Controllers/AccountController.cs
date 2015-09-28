@@ -51,7 +51,7 @@ namespace TravelMS.Controllers
                 if (!WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
                     WebSecurity.CreateUserAndAccount(model.User_ID, model.Password);
 
-                if (ModelState.IsValid && WebSecurity.Login(model.User_ID, model.Password, persistCookie: model.RememberMe))
+                else if (ModelState.IsValid)
                 {
                     try
                     {

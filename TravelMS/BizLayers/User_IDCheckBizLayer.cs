@@ -22,6 +22,7 @@ namespace TravelMS
                 resReader.Close();
                 return false;
             }
+            resReader.Close();
             return true;
             //if (proxyObj.CheckUser(requestedUser_ID))
             //    return true;
