@@ -15,6 +15,8 @@ namespace TravelMS.Controllers
     {        
         public ActionResult Index()
         {
+            var modelList = TravelBizLayer.GetRequestList();
+            ViewBag.capacity = modelList.Capacity.ToString();
             return View();
         }
 
