@@ -42,10 +42,9 @@ namespace TravelMS
             var rList = new List<ClaimRequestsModel>();
             while (dr.Read())
             {
-                System.Diagnostics.Debug.WriteLine(rList);
                 rList.Add(new ClaimRequestsModel
                 {
-                    Claim_ID = (string)(dr[0]),
+                    Claim_ID = dr.GetString(0),
                     Travel_Request_ID = dr.GetString(1),
                     Claim_Amount = dr.GetInt32(2),
                     Settled_Amount = dr.GetInt32(3),
@@ -93,11 +92,9 @@ namespace TravelMS
                     Claim_ID = (string)(dr[0]),
                     Travel_Request_ID = dr.GetString(1),
                     Claim_Amount = dr.GetInt32(2),
-                    Settled_Amount = dr.GetInt32(3),
-                    Remarks = dr.GetString(4),
-                    Admin_Remarks = dr.GetString(5),
-                    Claim_Status = StatusDetail.ClaimStatus(dr.GetString(6)),
-                    Admin_ID = dr.GetString(7)
+                    Remarks = dr.GetString(3),
+                    Claim_Status = StatusDetail.ClaimStatus(dr.GetString(4)),
+                    Admin_ID = dr.GetString(5)
                 });
             }
             dr.Close();

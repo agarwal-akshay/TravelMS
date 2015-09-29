@@ -40,10 +40,9 @@ namespace TravelMS.Controllers
             return View(updatedmodelList);
         }
 
-        [ValidateAntiForgeryToken]
         public ActionResult reset()
         {
-            return View();
+            return View("Error");
         }
 
         public ActionResult settle()
@@ -79,14 +78,13 @@ namespace TravelMS.Controllers
                 var res = AdminPanelBizLayer.addAgent(model);
             }
             ModelState.Clear();
-            ViewBag.Message = "Agent Addition Successful! <a href=\"/Admin\">Go to Home page</a>";
+            ViewBag.Message = "Agent Addition Successful! <a href='/Admin'>Go to Dash</a>";
             return View("Success");
         }
 
-        [ValidateAntiForgeryToken]
         public ActionResult manageAgent()
         {
-            return View();
+            return View("Error");
         }
     }
 }

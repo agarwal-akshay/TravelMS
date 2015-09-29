@@ -42,7 +42,7 @@ namespace TravelMS.Controllers
                     if (!TravelBizLayer.TravelReqBiz(model))
                         return View("Error");
 
-                    ViewBag.Message = "<h3>Travel Request Registered!</h3><br/><a href='Employee/addAcco'>Add accommodation details.</a>  <a href='Employee'>Go to Dashboard</a>";
+                    ViewBag.Message = "<h3>Travel Request Registered!</h3><br/><a href='/Employee/addAcco'>Add accommodation details.</a>  <a href='Employee'>Go to Dashboard</a>";
                     return View("Success");
                 }
                 catch (MembershipCreateUserException e)
@@ -72,7 +72,7 @@ namespace TravelMS.Controllers
         public ActionResult addAcco(AccoModel model)
         {
             var res = AccoBizLayer.addAccoDetails(model);
-            ViewBag.Message = "Accommodation Added. <a href=\"/Employee\">Go to Dashboard.</a>";
+            ViewBag.Message = "Accommodation Added. <a href='/Employee'>Go to Dashboard.</a>";
             return View("Success");
         }
 
@@ -109,7 +109,7 @@ namespace TravelMS.Controllers
         public ActionResult ChangeTrReqInner(NewTravelRequestModel data)
         {
             TravelBizLayer.ChangeTravelReq(data);
-            ViewBag.Message = "Travel Request Successfully Changed";
+            ViewBag.Message = "Travel Request Successfully Changed <a href='/Employee'>Go to Dashboard.</a>";
             return View("Success");
         }
         

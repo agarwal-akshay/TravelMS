@@ -29,7 +29,7 @@ namespace TravelMS.Controllers
         {
             TravelBizLayer.CancelTicket(Request.Params["Ticket_Booking_ID"]);
 
-            ViewBag.Message = "Ticket Booking Successful! <a href=\"/Agent\">Go to Home page</a>";
+            ViewBag.Message = "Ticket Cancelled Successfully! <a href='/Agent'>Go to Dash</a>";
             return View("Success");
         }
 
@@ -64,7 +64,7 @@ namespace TravelMS.Controllers
                     if (!AgentBizLayer.BookTicketBiz(model))
                         return View("Error");
 
-                    ViewBag.Message = "Ticket Booking Successful! <a href=\"/Agent\">Go to Home page</a>";
+                    ViewBag.Message = "Ticket Booking Successful! <a href='/Agent'>Go to Dash</a>";
                     return View("Success");
                 }
                 catch (MembershipCreateUserException e)

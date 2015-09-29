@@ -16,13 +16,15 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
-            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks]) VALUES (@Travel_Request_ID,@Claim_Amount,@Settled_Amount,@Remarks)");
+            SqlCommand insertCmmnd = new SqlCommand("INSERT INTO CLAIM_REQUESTS ([Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks],[Admin_ID],[Admin_Remarks]) VALUES (@Travel_Request_ID,@Claim_Amount,@Settled_Amount,@Remarks,@Admin_ID,@Admin_Remarks)");
             insertCmmnd.CommandType = CommandType.Text;
 
             insertCmmnd.Parameters.AddWithValue("@Travel_Request_ID", claimData.Travel_Request_ID);
             insertCmmnd.Parameters.AddWithValue("@Claim_Amount", claimData.Claim_Amount);
             insertCmmnd.Parameters.AddWithValue("@Settled_Amount", 0);
             insertCmmnd.Parameters.AddWithValue("@Remarks", claimData.Remarks);
+            insertCmmnd.Parameters.AddWithValue("@Admin_ID", "admin1");
+            insertCmmnd.Parameters.AddWithValue("@Admin_Remarks", "NULL");
 
             int rowsAffected = travelMSysDB.ExecuteNonQuery(insertCmmnd);
             Console.Write("rowsAffected " + rowsAffected);
@@ -88,7 +90,7 @@ namespace TravelMS
         {
             SqlDatabase travelMSysDB = new SqlDatabase(ConnString.DBConnectionString);
 
-            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Claim_ID],[Travel_Request_ID],[Claim_Amount],[Settled_Amount],[Emp_Remarks],[Admin_Remarks],[Claim_Status],[Admin_ID] FROM CLAIM_REQUESTS WHERE Admin_ID = @CurUser_ID AND Claim_Status = 'S'");
+            SqlCommand reqListCmmnd = new SqlCommand("SELECT [Claim_ID],[Travel_Request_ID],[Claim_Amount],[Emp_Remarks],[Claim_Status],[Admin_ID] FROM CLAIM_REQUESTS WHERE Admin_ID = @CurUser_ID AND Claim_Status = 'S'");
 
             reqListCmmnd.Parameters.AddWithValue("@CurUser_ID", WebSecurity.CurrentUserName);
 

@@ -6,16 +6,16 @@
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
-<ol>
-    <li>
+<ol class="round">
+    <li class="one">
         <h5>Book Ticket</h5>
         @Html.ActionLink("View Booking Requests", "ViewBookingRequests", "Agent")
     </li>
-    <li>
+    <li class="two">
         <h5>Cancel Booking</h5>
         @Html.ActionLink("View Booked Tickets", "CancelBookedTickets", "Agent")
     </li>
-    <li>
+    <li class="three">
         <h5>Delegate Booking</h5>
         @Html.ActionLink("Go", "DelegateBooking", "Agent")
     </li>
